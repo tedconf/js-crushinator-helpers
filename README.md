@@ -3,7 +3,7 @@
 JavaScript helpers to produce [Crushinator](https://github.com/tedconf/crushinator) image URLs.
 
     crushinator('http://images.ted.com/image.jpg', 'w=320')
-      // => 'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320'
+      // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
 
 Written using ES6 module syntax. Non-ES6 consumers will need to apply a transpiler.
 
@@ -19,7 +19,7 @@ This library provides the following methods:
 Default method. For images on whitelisted domains, it will return the URL for a crushed version of the specified image:
 
     crushinator.crush('http://images.ted.com/image.jpg', 'w=320')
-      // => 'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320'
+      // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
 
 For images hosted outside Crushinator's whitelisted domains, it will simply return the original URL:
 
@@ -28,11 +28,11 @@ For images hosted outside Crushinator's whitelisted domains, it will simply retu
 
 It will also avoid double-crushing images, and will update old Crushinator URLs to the new host:
 
-    crushinator.crush('https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320', 'w=640')
-      // => 'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=640'
+    crushinator.crush('https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320', 'w=640')
+      // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640'
 
     crushinator.crush('https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg', 'w=320')
-      // => 'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320'
+      // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
 
 ### uncrush ( url )
 
@@ -42,7 +42,7 @@ Restore a previously crushed URL to its original form.
 
 Note that the protocol must be borrowed from the crushed URL regardless of whether or not the host actually supports HTTPS.
 
-    crushinator.uncrush('https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320')
+    crushinator.uncrush('https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320')
       // => 'https://images.ted.com/image.jpg'
 
 ### crushable ( url )

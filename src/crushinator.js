@@ -25,7 +25,7 @@ export function crush(url, options) {
     return url;
   }
 
-  return 'https://tedcdnpi-a.akamaihd.net/' +
+  return 'https://tedcdnpi-a.akamaihd.net/r/' +
     url.replace(/.*\/\//, '') +
     '?' + (options || '');
 }
@@ -39,14 +39,8 @@ Restore a previously crushed URL to its original form.
 export function uncrush(url) {
   var parts;
 
-  // Check the Akamai host
-  parts = url.match(/(.+)?\/\/tedcdnpi-a\.akamaihd\.net\/([^?]+)/);
-  if (parts) {
-    return uncrush(parts[1] + '//' + parts[2]);
-  }
-
-  // Check the old CDN hosts (used prior to April 2015)
-  parts = url.match(/(.+)?\/\/img(?:-ssl)?\.tedcdn\.com\/r\/([^?]+)/);
+  // Avoid double-crushing images
+  parts = url.match(/(.+)?\/\/(?:img(?:-ssl)?\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
   if (parts) {
     return uncrush(parts[1] + '//' + parts[2]);
   }

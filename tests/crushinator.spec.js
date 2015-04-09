@@ -27,7 +27,7 @@ describe('crushinator', function () {
   describe('uncrush', function () {
     it('should revert images that were crushed through tedcdnpi-a.akamaihd.net', function () {
       assert.equal(
-        crushinator.uncrush('https://tedcdnpi-a.akamaihd.net/assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg?ll=1&quality=89&w=500'),
+        crushinator.uncrush('https://tedcdnpi-a.akamaihd.net/r/assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg?ll=1&quality=89&w=500'),
         'https://assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg'
       );
     });
@@ -51,14 +51,14 @@ describe('crushinator', function () {
     it('should provide Crushinator URLs for crushable images', function () {
       assert.equal(
         crushinator.crush('https://images.ted.com/image.jpg', 'w=200'),
-        'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=200'
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200'
       );
     });
 
     it('should produce HTTPS URLs even from HTTP URLs', function () {
       assert.equal(
         crushinator.crush('http://images.ted.com/image.jpg', 'w=200'),
-        'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=200'
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200'
       );
     });
 
@@ -71,15 +71,15 @@ describe('crushinator', function () {
 
     it('should avoid double-crushing images', function () {
       assert.equal(
-        crushinator.crush('https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320', 'w=640'),
-        'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=640'
+        crushinator.crush('https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320', 'w=640'),
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640'
       );
     });
 
     it('should update old Crushinator URLs to the new host', function () {
       assert.equal(
         crushinator.crush('https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg', 'w=320'),
-        'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320'
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
       );
     });
   });
