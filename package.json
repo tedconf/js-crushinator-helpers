@@ -1,0 +1,14 @@
+{
+  "name": "js-crushinator-helpers",
+  "description": "JS methods to produce crushed image URLs.",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tedconf/js-crushinator-helpers.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-mocha": "^2.0.1"
+  }
+}
