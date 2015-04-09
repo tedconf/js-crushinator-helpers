@@ -51,10 +51,10 @@ Note that the protocol must be borrowed from the crushed URL regardless of wheth
 
 Returns `true` if the image's host is in Crushinator's whitelist, `false` otherwise.
 
-    crushinator.crush('http://images.ted.com/image.jpg')
+    crushinator.crushable('http://images.ted.com/image.jpg')
       // => true
 
-    crushinator.crush('http://celly.xxx/waffles.jpg')
+    crushinator.crushable('http://celly.xxx/waffles.jpg')
       // => false
 
 ## Development
