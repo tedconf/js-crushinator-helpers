@@ -19,6 +19,10 @@ describe('crushinator', function () {
       assert(crushinator.crushable('http://storage.ted.com/images/test.jpg'));
     });
 
+    it('should approve images on tedcdnpe-a.akamaihd.net', function () {
+      assert(crushinator.crushable('http://tedcdnpe-a.akamaihd.net/images/ted/d3b8fd408c1f2576d86a6d781da0dfd768d0cda4_240x180.jpg'));
+    });
+
     it('should deny images on unrecognized domains', function () {
       assert(!crushinator.crushable('http://test.com/images/test.jpg'));
     });

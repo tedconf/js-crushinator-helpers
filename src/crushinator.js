@@ -55,7 +55,7 @@ Check to see if a URL passes Crushinator's host whitelist.
 @returns {boolean}
 */
 export function crushable(url) {
-  return !!url.match(/(tedcdn|(images|storage)\.ted|s3.amazonaws)\.com/);
+  return !!url.match(/(tedcdn|(images|storage|tedlive|tedlive-staging|tedcdnp(e|f)-a)\.ted|(s3|s3-us-west-2)\.amazonaws|\.akamaihd)\.(com|net)/);
 }
 
 export default crush;
