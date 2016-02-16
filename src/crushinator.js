@@ -5,6 +5,39 @@ http://github.com/tedconf/js-crushinator-helpers
 */
 
 /**
+A list of strings and regular expressions
+*/
+const imageHosts = [
+  'assets.tedcdn.com',
+  'pb-assets.tedcdn.com',
+  'assets2.tedcdn.com',
+  'tedcdnpf-a.akamaihd.net',
+  'tedcdnpa-a.akamaihd.net',
+  'tedcdnpe-a.akamaihd.net',
+  'images.ted.com',
+  'storage.ted.com',
+  'tedlive.ted.com',
+  'tedlive-staging.ted.com',
+  'ted2017.ted.com',
+  'ted2017-staging.ted.com',
+  'staging.ted.com',
+  's3.amazonaws.com',
+  's3-us-west-2.amazonaws.com',
+  'ems.ted.com',
+  'ems-staging.ted.com',
+];
+
+/**
+Returns the portion of input URL that corresponds to the host name.
+
+@param {string} url
+@returns {string}
+*/
+function extractHost(url) {
+  return url.replace(/.*\/\/([^\/]+).*/, '$1');
+}
+
+/**
 Returns a version of the image URL that uses Crushinator with the
 specified options string:
 
@@ -27,7 +60,7 @@ export function crush(url, options) {
 
   return 'https://tedcdnpi-a.akamaihd.net/r/' +
     url.replace(/.*\/\//, '') +
-    '?' + (options || '');
+    (options ? '?' + options : '');
 }
 
 /**
@@ -55,7 +88,7 @@ Check to see if a URL passes Crushinator's host whitelist.
 @returns {boolean}
 */
 export function crushable(url) {
-  return !!url.match(/(tedcdn|(images|storage|tedlive|tedlive-staging|tedcdnp(e|f)-a)\.ted|(s3|s3-us-west-2)\.amazonaws|\.akamaihd)\.(com|net)/);
+  return imageHosts.indexOf(extractHost(url)) !== -1;
 }
 
 export default crush;
