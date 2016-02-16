@@ -4,12 +4,22 @@ var crushinator = require('../tmp/es5/crushinator');
 // Hosts where crushable images are stored
 var imageHosts = [
   'assets.tedcdn.com',
-  'images.ted.com',
-  's3.amazonaws.com',
-  'storage.ted.com',
+  'pb-assets.tedcdn.com',
+  'assets2.tedcdn.com',
+  'tedcdnpf-a.akamaihd.net',
+  'tedcdnpa-a.akamaihd.net',
   'tedcdnpe-a.akamaihd.net',
+  'images.ted.com',
+  'storage.ted.com',
   'tedlive.ted.com',
   'tedlive-staging.ted.com',
+  'ted2017.ted.com',
+  'ted2017-staging.ted.com',
+  'staging.ted.com',
+  's3.amazonaws.com',
+  's3-us-west-2.amazonaws.com',
+  'ems.ted.com',
+  'ems-staging.ted.com',
 ];
 
 // Hosts that have historically been used for crushinator
