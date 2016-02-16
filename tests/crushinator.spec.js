@@ -1,72 +1,90 @@
 var assert = require('assert');
 var crushinator = require('../tmp/es5/crushinator');
 
+// Hosts where crushable images are stored
+var imageHosts = [
+  'assets.tedcdn.com',
+  'pb-assets.tedcdn.com',
+  'assets2.tedcdn.com',
+  'tedcdnpf-a.akamaihd.net',
+  'tedcdnpa-a.akamaihd.net',
+  'tedcdnpe-a.akamaihd.net',
+  'images.ted.com',
+  'storage.ted.com',
+  'tedlive.ted.com',
+  'tedlive-staging.ted.com',
+  'ted2017.ted.com',
+  'ted2017-staging.ted.com',
+  'staging.ted.com',
+  's3.amazonaws.com',
+  's3-us-west-2.amazonaws.com',
+  'ems.ted.com',
+  'ems-staging.ted.com',
+];
+
+// Hosts that have historically been used for crushinator
+var crushinatorHosts = [
+  'img.tedcdn.com',
+  'img-ssl.tedcdn.com',
+  'tedcdnpi-a.akamaihd.net',
+];
+
 describe('crushinator', function () {
   describe('crushable', function () {
-    it('should approve images on tedcdn.com', function () {
-      assert(crushinator.crushable('http://tedcdn.com/images/test.jpg'));
-    });
-
-    it('should approve images on images.ted.com', function () {
-      assert(crushinator.crushable('http://images.ted.com/images/test.jpg'));
-    });
-
-    it('should approve images on s3.amazonaws.com', function () {
-      assert(crushinator.crushable('http://s3.amazonaws.com/images/test.jpg'));
-    });
-
-    it('should approve images on storage.ted.com', function () {
-      assert(crushinator.crushable('http://storage.ted.com/images/test.jpg'));
-    });
-
-    it('should approve images on tedcdnpe-a.akamaihd.net', function () {
-      assert(crushinator.crushable('http://tedcdnpe-a.akamaihd.net/images/ted/d3b8fd408c1f2576d86a6d781da0dfd768d0cda4_240x180.jpg'));
+    imageHosts.forEach(function (imageHost) {
+      it('should approve images on ' + imageHost, function () {
+        assert(crushinator.crushable('http://' + imageHost + '/images/test.jpg'));
+        assert(crushinator.crushable('https://' + imageHost + '/images/test.jpg'));
+      });
     });
 
     it('should deny images on unrecognized domains', function () {
       assert(!crushinator.crushable('http://test.com/images/test.jpg'));
+      assert(!crushinator.crushable('https://test.com/images/test.jpg'));
     });
   });
 
   describe('uncrush', function () {
-    it('should revert images that were crushed through tedcdnpi-a.akamaihd.net', function () {
-      assert.equal(
-        crushinator.uncrush('https://tedcdnpi-a.akamaihd.net/r/assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg?ll=1&quality=89&w=500'),
-        'https://assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg'
-      );
+    crushinatorHosts.forEach(function (crushinatorHost) {
+      it('should revert images that were hosted on ' + crushinatorHost, function () {
+        imageHosts.forEach(function (imageHost) {
+          assert.equal(
+            crushinator.uncrush('https://' + crushinatorHost + '/r/' + imageHost + '/images/test.jpg?ll=1&quality=89&w=500'),
+            'https://' + imageHost + '/images/test.jpg'
+          );
+
+          assert.equal(
+            crushinator.uncrush('http://' + crushinatorHost + '/r/' + imageHost + '/images/test.jpg?ll=1&quality=89&w=500'),
+            'http://' + imageHost + '/images/test.jpg'
+          );
+        });
+      });
     });
 
-    it('should revert images that were crushed through img.tedcdn.com', function () {
+    it('should leave uncrushed images intact', function () {
       assert.equal(
-        crushinator.uncrush('http://img.tedcdn.com/r/assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg?ll=1&quality=89&w=500'),
-        'http://assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg'
-      );
-    });
-
-    it('should revert images that were crushed through img-ssl.tedcdn.com', function () {
-      assert.equal(
-        crushinator.uncrush('https://img-ssl.tedcdn.com/r/assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg?ll=1&quality=89&w=500'),
-        'https://assets.tedcdn.com/images/playlists/what_makes_you_happy.jpg'
+        crushinator.uncrush('http://test.com/images/test.jpg'),
+        'http://test.com/images/test.jpg'
       );
     });
   });
 
   describe('crush', function () {
-    it('should provide Crushinator URLs for crushable images', function () {
-      assert.equal(
-        crushinator.crush('https://images.ted.com/image.jpg', 'w=200'),
-        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200'
-      );
+    imageHosts.forEach(function (imageHost) {
+      it('should provide secure Crushinator URLs for images hosted on ' + imageHost, function () {
+        assert.equal(
+          crushinator.crush('http://' + imageHost + '/image.jpg', 'w=200'),
+          'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
+        );
+
+        assert.equal(
+          crushinator.crush('https://' + imageHost + '/image.jpg', 'w=200'),
+          'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
+        );
+      });
     });
 
-    it('should produce HTTPS URLs even from HTTP URLs', function () {
-      assert.equal(
-        crushinator.crush('http://images.ted.com/image.jpg', 'w=200'),
-        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200'
-      );
-    });
-
-    it('should return original URL for images hosted outside the whitelist', function () {
+    it('should return the original URL for images hosted outside the whitelist', function () {
       assert.equal(
         crushinator.crush('http://celly.xxx/waffles.jpg', 'w=320'),
         'http://celly.xxx/waffles.jpg'
@@ -84,6 +102,13 @@ describe('crushinator', function () {
       assert.equal(
         crushinator.crush('https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg', 'w=320'),
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+      );
+    });
+
+    it('should exclude the query marker when no options are provided', function () {
+      assert.equal(
+        crushinator.crush('https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg'),
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
       );
     });
   });
