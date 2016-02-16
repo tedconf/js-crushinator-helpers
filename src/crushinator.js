@@ -27,7 +27,7 @@ export function crush(url, options) {
 
   return 'https://tedcdnpi-a.akamaihd.net/r/' +
     url.replace(/.*\/\//, '') +
-    '?' + (options || '');
+    (options ? '?' + options : '');
 }
 
 /**

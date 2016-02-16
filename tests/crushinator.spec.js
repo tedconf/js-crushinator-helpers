@@ -94,5 +94,12 @@ describe('crushinator', function () {
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
       );
     });
+
+    it('should exclude the query marker when no options are provided', function () {
+      assert.equal(
+        crushinator.crush('https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg'),
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
+      );
+    });
   });
 });
