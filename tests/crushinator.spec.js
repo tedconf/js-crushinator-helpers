@@ -18,6 +18,7 @@ var imageHosts = [
   'staging.ted.com',
   's3.amazonaws.com',
   's3-us-west-2.amazonaws.com',
+  'www.filepicker.io',
   'ems.ted.com',
   'ems-staging.ted.com',
 ];
