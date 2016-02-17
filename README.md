@@ -2,10 +2,8 @@
 
 JavaScript helpers to produce [Crushinator](https://github.com/tedconf/crushinator) image URLs.
 
-    crushinator('http://images.ted.com/image.jpg', 'w=320')
+    crushinator.crush('http://images.ted.com/image.jpg', 'w=320')
       // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
-
-Written using ES6 module syntax. Non-ES6 consumers will need to apply a transpiler.
 
 ## API
 
@@ -16,7 +14,7 @@ This library provides the following methods:
 * url: (string, required) - URL of the image you would like to be crushed.
 * options: (string, optional) - String of query params corresponding to [crushinator's query params](https://github.com/tedconf/crushinator#image-resize-get-values)
 
-Default method. For images on whitelisted domains, it will return the URL for a crushed version of the specified image:
+For images on whitelisted domains, this method will return the URL for a crushed version of the specified image:
 
     crushinator.crush('http://images.ted.com/image.jpg', 'w=320')
       // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
@@ -56,10 +54,3 @@ Returns `true` if the image's host is in Crushinator's whitelist, `false` otherw
 
     crushinator.crushable('http://celly.xxx/waffles.jpg')
       // => false
-
-## Development
-
-A simple test suite is included, and can be initialized through Gulp:
-
-    npm install
-    gulp

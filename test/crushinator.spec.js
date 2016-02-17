@@ -1,5 +1,5 @@
 var assert = require('assert');
-var crushinator = require('../tmp/es5/crushinator');
+var crushinator = require('../lib/crushinator');
 
 // Hosts where crushable images are stored
 var imageHosts = [

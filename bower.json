@@ -1,8 +1,0 @@
-{
-  "name": "js-crushinator-helpers",
-  "description": "JS methods to produce crushed image URLs.",
-  "private": true,
-  "main": "src/crushinator.js",
-  "dependencies": {},
-  "devDependencies": {}
-}

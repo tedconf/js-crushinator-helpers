@@ -1,14 +1,22 @@
 {
-  "name": "js-crushinator-helpers",
-  "description": "JS methods to produce crushed image URLs.",
+  "name": "crushinator-helpers",
+  "version": "0.0.0",
+  "description": "JS methods to produce crushinator'd image URLs.",
+  "license": "MIT",
+  "main": "lib/crushinator.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:tedconf/js-crushinator-helpers.git"
   },
+  "scripts": {
+    "build": "babel -d lib/ src/",
+    "test": "npm run build && mocha",
+    "prepublish": "npm run build"
+  },
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-babel": "^5.1.0",
-    "gulp-mocha": "^2.0.1"
+    "babel-cli": "^6.5.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.5.0",
+    "mocha": "^2.4.5"
   }
 }
