@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "babel -d lib/ src/",
-    "lint": "jshint src && jscs src",
+    "lint": "jshint . && jscs .",
     "pretest": "npm run lint",
     "test": "mocha --compilers js:babel-register"
   },

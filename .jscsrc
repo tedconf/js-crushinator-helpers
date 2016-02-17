@@ -1,3 +1,7 @@
 {
-  "preset": "airbnb"
+  "preset": "airbnb",
+  "excludeFiles": [
+    "lib/**",
+    "node_modules/**"
+  ]
 }
