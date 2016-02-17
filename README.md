@@ -12,13 +12,13 @@ crushinator.crush('http://images.ted.com/image.jpg', 'w=320')
 ### With NPM
 
 ```
-npm install crushinator-helpers
+npm install ted-crushinator-helpers
 ```
 
 ### With Bower
 
 ```
-bower install crushinator-helpers
+bower install ted-crushinator-helpers
 ```
 
 ### Manual
