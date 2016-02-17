@@ -7,6 +7,26 @@ crushinator.crush('http://images.ted.com/image.jpg', 'w=320')
   // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
 ```
 
+## Installation
+
+### With NPM
+
+```
+npm install crushinator-helpers
+```
+
+### With Bower
+
+```
+bower install crushinator-helpers
+```
+
+### Manual
+
+Code in `lib/crushinator.js` can be copied to your application.
+
+This file is in UMD and has no other dependencies, so you can import it as an AMD/CommonJS module or simply let it occupy the `crushinator` namespace in your app's global.
+
 ## API
 
 This library provides the following methods:
