@@ -1,8 +1,11 @@
-var assert = require('assert');
-var crushinator = require('../lib/crushinator');
+'use strict';
+
+import { describe, it } from 'mocha';
+import assert from 'assert';
+import * as crushinator from '../src/crushinator';
 
 // Hosts where crushable images are stored
-var imageHosts = [
+const imageHosts = [
   'assets.tedcdn.com',
   'pb-assets.tedcdn.com',
   'assets2.tedcdn.com',
@@ -24,7 +27,7 @@ var imageHosts = [
 ];
 
 // Hosts that have historically been used for crushinator
-var crushinatorHosts = [
+const crushinatorHosts = [
   'img.tedcdn.com',
   'img-ssl.tedcdn.com',
   'tedcdnpi-a.akamaihd.net',
@@ -49,13 +52,17 @@ describe('crushinator', function () {
     crushinatorHosts.forEach(function (crushinatorHost) {
       it('should revert images that were hosted on ' + crushinatorHost, function () {
         imageHosts.forEach(function (imageHost) {
+          let url =
+            '//' + crushinatorHost + '/r/' +
+            imageHost + '/images/test.jpg?ll=1&quality=89&w=500';
+
           assert.equal(
-            crushinator.uncrush('https://' + crushinatorHost + '/r/' + imageHost + '/images/test.jpg?ll=1&quality=89&w=500'),
+            crushinator.uncrush('https:' + url),
             'https://' + imageHost + '/images/test.jpg'
           );
 
           assert.equal(
-            crushinator.uncrush('http://' + crushinatorHost + '/r/' + imageHost + '/images/test.jpg?ll=1&quality=89&w=500'),
+            crushinator.uncrush('http:' + url),
             'http://' + imageHost + '/images/test.jpg'
           );
         });
@@ -73,13 +80,15 @@ describe('crushinator', function () {
   describe('crush', function () {
     imageHosts.forEach(function (imageHost) {
       it('should provide secure Crushinator URLs for images hosted on ' + imageHost, function () {
+        let url = '//' + imageHost + '/image.jpg';
+
         assert.equal(
-          crushinator.crush('http://' + imageHost + '/image.jpg', 'w=200'),
+          crushinator.crush('http:' + url, 'w=200'),
           'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
         );
 
         assert.equal(
-          crushinator.crush('https://' + imageHost + '/image.jpg', 'w=200'),
+          crushinator.crush('https:' + url, 'w=200'),
           'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
         );
       });
@@ -93,22 +102,25 @@ describe('crushinator', function () {
     });
 
     it('should avoid double-crushing images', function () {
+      let url = 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320';
       assert.equal(
-        crushinator.crush('https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320', 'w=640'),
+        crushinator.crush(url, 'w=640'),
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640'
       );
     });
 
     it('should update old Crushinator URLs to the new host', function () {
+      let url = 'https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg';
       assert.equal(
-        crushinator.crush('https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg', 'w=320'),
+        crushinator.crush(url, 'w=320'),
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
       );
     });
 
     it('should exclude the query marker when no options are provided', function () {
+      let url = 'https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg';
       assert.equal(
-        crushinator.crush('https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg'),
+        crushinator.crush(url),
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
       );
     });
