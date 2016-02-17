@@ -1,0 +1,11 @@
+.babelrc
+.editorconfig
+.gitignore
+.jscsrc
+.jshintignore
+.jshintrc
+.npmignore
+.nvmrc
+.travis.yml
+bower.json
+test/
