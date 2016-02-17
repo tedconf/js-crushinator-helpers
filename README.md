@@ -1,4 +1,4 @@
-# JS Crushinator Helpers
+# JS Crushinator Helpers [![NPM Version](https://img.shields.io/npm/v/ted-crushinator-helpers.svg?style=flat)](https://npmjs.org/package/ted-crushinator-helpers) [![Build Status](https://travis-ci.org/tedconf/js-crushinator-helpers.svg?branch=master)](https://travis-ci.org/tedconf/js-crushinator-helpers)
 
 JavaScript methods to produce [Crushinator'd](https://github.com/tedconf/crushinator) image URLs.
 
