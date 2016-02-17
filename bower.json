@@ -1,10 +1,10 @@
 {
   "name": "crushinator-helpers",
   "description": "JS methods to produce crushinator'd image URLs.",
-  "main": "src/crushinator.js",
-  "moduleType": "es6",
+  "main": "lib/crushinator.js",
   "license": "MIT",
   "ignore": [
+    "/src",
     "/test"
   ]
 }

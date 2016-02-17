@@ -10,8 +10,7 @@
   },
   "scripts": {
     "build": "babel -d lib/ src/",
-    "test": "npm run build && mocha",
-    "prepublish": "npm run build"
+    "test": "npm run build && mocha"
   },
   "dependencies": {},
   "devDependencies": {
