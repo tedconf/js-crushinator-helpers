@@ -3,7 +3,7 @@
   "version": "2.0.1",
   "description": "JS methods to produce crushinator'd image URLs.",
   "license": "MIT",
-  "main": "lib/crushinator.js",
+  "main": "dist/crushinator.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:tedconf/js-crushinator-helpers.git"
