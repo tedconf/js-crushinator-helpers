@@ -119,10 +119,47 @@ describe('crushinator', function () {
 
     it('should exclude the query marker when no options are provided', function () {
       let url = 'https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg';
+
       assert.equal(
         crushinator.crush(url),
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
       );
+
+      assert.equal(
+        crushinator.crush(url, ''),
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
+      );
+
+      assert.equal(
+        crushinator.crush(url, {}),
+        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
+      );
+    });
+
+    context('with POJO options', function () {
+      const uncrushed = 'https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg';
+      const crushed = 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg';
+
+      it('should recognize the width option', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, { width: 300 }),
+          crushed + '?w=300'
+        );
+      });
+
+      it('should recognize the height option', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, { height: 300 }),
+          crushed + '?h=300'
+        );
+      });
+
+      it('should recognize the quality option', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, { quality: 90 }),
+          crushed + '?quality=90'
+        );
+      });
     });
   });
 });
