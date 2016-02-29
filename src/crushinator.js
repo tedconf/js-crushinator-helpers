@@ -6,6 +6,8 @@ http://github.com/tedconf/js-crushinator-helpers
 
 'use strict';
 
+import stringifyOptions from './lib/stringifyOptions';
+
 /**
 A list of strings and regular expressions
 */
@@ -81,13 +83,18 @@ specified options string:
 @param {string} options
 @returns {string}
 */
-export function crush(url, options) {
+export function crush(url, options={}) {
   // Avoid double-crushing the image
   url = uncrush(url);
 
   // Apply host whitelist
   if (!crushable(url)) {
     return url;
+  }
+
+  // Stringify object options
+  if (typeof options === 'object') { // or: everything is a duck
+    options = stringifyOptions(options);
   }
 
   return 'https://tedcdnpi-a.akamaihd.net/r/' +
