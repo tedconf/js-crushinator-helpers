@@ -4,7 +4,10 @@
   "main": "dist/crushinator.js",
   "license": "MIT",
   "ignore": [
+    "**/.*",
     "/src",
-    "/test"
+    "/test",
+    "package.json",
+    "rollup.config.js"
   ]
 }
