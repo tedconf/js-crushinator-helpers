@@ -23,7 +23,7 @@ bower install ted-crushinator-helpers
 
 ### Manual
 
-Code in `lib/crushinator.js` can be copied to your application.
+Code in `dist/crushinator.js` can be copied to your application.
 
 This file is in UMD and has no other dependencies, so you can import it as an AMD/CommonJS module or simply let it occupy the `crushinator` namespace in your app's global.
 
@@ -108,7 +108,7 @@ Use [NVM](https://github.com/creationix/nvm) to make sure you have the correct N
 
 ### Releasing a new version
 
-1. `npm run build` to produce a new `lib/crushinator.js`
+1. `npm run build` to produce a new `dist/crushinator.js`
 2. Update "version" in `package.json` and commit
 3. `git tag` the new semver
 4. Push master and the new tag upstream
