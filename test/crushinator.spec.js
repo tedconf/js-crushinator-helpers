@@ -157,6 +157,13 @@ describe('crushinator', function () {
           crushed + '?quality=90'
         );
       });
+
+      it('should support multiple options', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, { width: 640, height: 480, quality: 90 }),
+          crushed + '?w=640&h=480&quality=90'
+        );
+      });
     });
   });
 });
