@@ -3,6 +3,10 @@
 import {serialize} from './query-string';
 
 export class ParamBuilder {
+
+  /**
+  Constructor method.
+  */
   constructor(options) {
     this.options = options;
   }
@@ -16,13 +20,13 @@ export class ParamBuilder {
     for (const key in this.options) {
       if (values.hasOwnProperty(key)) {
         const model = this.options[key];
-        const value = model.filter(values, key);
+        const value = values[key];
         const param = (
           typeof model.param === 'function' ?
-          model.param(values, key) : model.param
+          model.param(value) : model.param
         );
 
-        params[param] = value;
+        params[param] = model.filter(value);
       }
     }
 
@@ -35,6 +39,7 @@ export class ParamBuilder {
   serialize(values) {
     return serialize(this.get(values));
   }
+
 }
 
 export default ParamBuilder;

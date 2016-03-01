@@ -5,17 +5,19 @@ values.
 
 'use strict';
 
-import {warn} from './log';
+import {error} from './log';
 
 /**
-Prepare a numerical Crushinator option.
+Prepare a numerical value.
+
+@param {*} value - Value that should be typecast as a number.
+@returns {number}
 */
-export function prepNumber(options, optionName) {
-  const incoming = options[optionName];
-  let outgoing = Number(incoming);
+export function prepNumber(value) {
+  let outgoing = Number(value);
 
   if (!isFinite(outgoing)) {
-    warn(`${optionName} value "${incoming}" is not a finite number`);
+    error(`"${value}" is not a finite number`);
     outgoing = 0;
   }
 
