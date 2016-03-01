@@ -5,7 +5,6 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "/src",
     "/test",
     "package.json",
     "rollup.config.js"
