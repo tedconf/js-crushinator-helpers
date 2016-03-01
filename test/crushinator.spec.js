@@ -164,6 +164,38 @@ describe('crushinator', function () {
           crushed + '?w=640&h=480&quality=90'
         );
       });
+
+      it('should recognize the crop size options', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, { crop: { width: 320, height: 240 } }),
+          crushed + '?precrop=320%2C240'
+        );
+      });
+
+      it('should recognize the crop location options', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            crop: {
+              width: 320, height: 240,
+              x: 250, y: 150,
+            },
+          }),
+          crushed + '?precrop=320%2C240%2C250%2C150'
+        );
+      });
+
+      it('should recognize the crop choreography option', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            crop: {
+              width: 320, height: 240,
+              x: 250, y: 150,
+              afterResize: true,
+            },
+          }),
+          crushed + '?c=320%2C240%2C250%2C150'
+        );
+      });
     });
   });
 });
