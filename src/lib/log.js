@@ -1,5 +1,5 @@
 /**
-Wrapper methods for handling errors.
+Wrapper methods for logging errors and other notices.
 */
 
 'use strict';

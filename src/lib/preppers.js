@@ -5,7 +5,7 @@ values.
 
 'use strict';
 
-import {warn} from './error';
+import {warn} from './log';
 
 /**
 Prepare a numerical Crushinator option.
