@@ -47,6 +47,7 @@ const imageHosts = [
 /**
 Returns the portion of input URL that corresponds to the host name.
 
+@private
 @param {string} url
 @returns {string}
 */
@@ -57,7 +58,7 @@ function extractHost(url) {
 /**
 Check to see if a URL passes Crushinator's host whitelist.
 
-@param {string} url
+@param {string} url - URL of image to check.
 @returns {boolean}
 */
 export function crushable(url) {
@@ -67,7 +68,7 @@ export function crushable(url) {
 /**
 Restore a previously crushed URL to its original form.
 
-@param {string} url
+@param {string} url - Previously optimized image URL.
 @returns {string}
 */
 export function uncrush(url) {
@@ -91,8 +92,23 @@ specified options string:
       => 'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320'
 
 @public
-@param {string} url
-@param {string} options
+@param {string} url - URL of image to be optimized.
+@param {Object} [options]
+@param {number} [options.width] - Target image width in pixels.
+@param {number} [options.height] - Target image height in pixels.
+@param {number} [options.quality] - Image quality as a percentage
+    (0-100).
+@param {Object} [options.crop] - Image crop configuration.
+@param {number} [options.crop.width] - Width of cropped section
+    in pixels.
+@param {number} [options.crop.height] - Height of cropped section
+    in pixels.
+@param {number} [options.crop.x] - Coordinate at which to start crop
+    (pixels from left.)
+@param {number} [options.crop.y] - Coordinate at which to start crop
+    (pixels from top.)
+@param {boolean} [options.crop.afterResize] - If true, crop will
+    take place after the image has been resized.
 @returns {string}
 */
 export function crush(url, options={}) {
