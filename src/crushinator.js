@@ -11,16 +11,6 @@ import {ParamBuilder} from './lib/param-builder';
 import {prepNumber} from './lib/preppers';
 
 /**
-Possible options parameters for Crushinator.
-*/
-const params = new ParamBuilder({
-  width: { param: 'w', filter: prepNumber },
-  height: { param: 'h', filter: prepNumber },
-  quality: { param: 'quality', filter: prepNumber },
-  crop: cropOption,
-});
-
-/**
 A list of strings and regular expressions
 */
 const imageHosts = [
@@ -43,6 +33,16 @@ const imageHosts = [
   'ems.ted.com',
   'ems-staging.ted.com',
 ];
+
+/**
+Possible options parameters for Crushinator.
+*/
+const params = new ParamBuilder({
+  width: { param: 'w', filter: prepNumber },
+  height: { param: 'h', filter: prepNumber },
+  quality: { param: 'quality', filter: prepNumber },
+  crop: cropOption,
+});
 
 /**
 Returns the portion of input URL that corresponds to the host name.
