@@ -1,11 +1,15 @@
 # Changelog
 
-### 2.1.0 (Unreleased)
+### (Upcoming)
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/129f407...master)
+
+### 2.1.0
 
 * [#3](https://github.com/tedconf/js-crushinator-helpers/issues/3) Add object form for Crushinator options
 * Move transpiled builds from `lib/` to `dist/` in repo.
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/cb355a0...master)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/cb355a0...129f407)
 
 ### 2.0.1
 
