@@ -149,7 +149,6 @@ Use [NVM](https://github.com/creationix/nvm) to make sure you have the correct N
 
 * `git clone git@github.com:tedconf/js-crushinator-helpers.git`
 * Change into the new directory
-* `nvm use` and if the required Node version is not installed on your system, `nvm install <version>`
 * `npm install`
 
 ### Running tests
@@ -161,4 +160,5 @@ Use [NVM](https://github.com/creationix/nvm) to make sure you have the correct N
 1. `npm run build` to produce a new `dist/crushinator.js`
 2. Update "version" in `package.json` and commit
 3. `git tag` the new semver
-4. Push master and the new tag upstream
+4. Push the master branch and new tag upstream to GitHub
+5. [`npm publish`](https://docs.npmjs.com/getting-started/publishing-npm-packages) the updated node module
