@@ -6,7 +6,19 @@ http://github.com/tedconf/js-crushinator-helpers
 
 'use strict';
 
-import stringifyOptions from './lib/stringifyOptions';
+import * as cropOption from './lib/crop-option';
+import {ParamBuilder} from './lib/param-builder';
+import {prepNumber} from './lib/preppers';
+
+/**
+Possible options parameters for Crushinator.
+*/
+const params = new ParamBuilder({
+  width: { param: 'w', filter: prepNumber },
+  height: { param: 'h', filter: prepNumber },
+  quality: { param: 'quality', filter: prepNumber },
+  crop: cropOption,
+});
 
 /**
 A list of strings and regular expressions
@@ -94,7 +106,7 @@ export function crush(url, options={}) {
 
   // Stringify object options
   if (typeof options === 'object') { // or: everything is a duck
-    options = stringifyOptions(options);
+    options = params.serialize(options);
   }
 
   return 'https://tedcdnpi-a.akamaihd.net/r/' +

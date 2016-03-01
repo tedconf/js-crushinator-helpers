@@ -12,10 +12,11 @@ Prepare a numerical Crushinator option.
 */
 export function prepNumber(options, optionName) {
   const incoming = options[optionName];
-  const outgoing = Number(incoming);
+  let outgoing = Number(incoming);
 
   if (!isFinite(outgoing)) {
     warn(`${optionName} value "${incoming}" is not a finite number`);
+    outgoing = 0;
   }
 
   return outgoing;
