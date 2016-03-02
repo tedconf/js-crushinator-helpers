@@ -196,6 +196,17 @@ describe('crushinator', function () {
           crushed + '?c=320%2C240%2C250%2C150'
         );
       });
+
+      it('should recognize crop options in hyphenated form', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            'crop-width': 320, 'crop-height': 240,
+            'crop-x': 250, 'crop-y': 150,
+            'crop-afterResize': true,
+          }),
+          crushed + '?c=320%2C240%2C250%2C150'
+        );
+      });
     });
   });
 });
