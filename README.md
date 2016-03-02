@@ -158,6 +158,19 @@ crushinator.crush('http://images.ted.com/image.jpg', {
 
 The above example would resize the original image to 640x480 and then take a 200x100 crop of the resized image, starting at 50x25.
 
+Crop configuration options can also be sent in hyphenated form:
+
+```javascript
+crushinator.crush('http://images.ted.com/image.jpg', {
+    width: 640,
+    height: 480,
+    'crop-width': 200, 'crop-height': 100,
+    'crop-x': 50, 'crop-y': 25,
+    'crop-afterResize': true
+  })
+  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?quality=93'
+```
+
 ### uncrush
 
 Restore a previously crushed URL to its original form.
