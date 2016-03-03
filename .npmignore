@@ -9,4 +9,4 @@
 .travis.yml
 test/
 bower.json
-rollup.config.js
+build.js

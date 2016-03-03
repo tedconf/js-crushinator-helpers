@@ -3,13 +3,13 @@
   "version": "2.1.0",
   "description": "JS methods to produce crushinator'd image URLs.",
   "license": "MIT",
-  "main": "dist/crushinator.js",
+  "main": "dist/crushinator.umd.min.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:tedconf/js-crushinator-helpers.git"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "node build",
     "lint": "jshint . && jscs .",
     "pretest": "npm run lint",
     "test": "mocha"
@@ -23,6 +23,7 @@
     "jshint": "^2.9.1",
     "mocha": "^2.4.5",
     "rollup": "^0.25.4",
-    "rollup-plugin-babel": "^2.4.0"
+    "rollup-plugin-babel": "^2.4.0",
+    "rollup-plugin-uglify": "^0.2.0"
   }
 }
