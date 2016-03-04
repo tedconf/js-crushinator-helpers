@@ -1,4 +1,6 @@
 import assert from 'assert';
+import * as sinon from 'sinon';
+
 import * as crushinator from '../src/crushinator';
 
 // Hosts where crushable images are stored
@@ -75,6 +77,25 @@ describe('crushinator', function () {
   });
 
   describe('crush', function () {
+    const sandbox = sinon.sandbox.create();
+
+    beforeEach(function () {
+      sandbox.spy(console, 'warn');
+    });
+
+    afterEach(function () {
+      sandbox.restore();
+    });
+
+    it('should warn about use of the deprecated query string format', function () {
+      crushinator.crush('http://images.ted.com/image.jpg', 'w=320');
+
+      sinon.assert.calledOnce(console.warn);
+      sinon.assert.calledWith(console.warn,
+        'Sending Crushinator options as a query string is ' +
+        'deprecated. Please use the object format.');
+    });
+
     imageHosts.forEach(function (imageHost) {
       it('should provide secure Crushinator URLs for images hosted on ' + imageHost, function () {
         let url = '//' + imageHost + '/image.jpg';

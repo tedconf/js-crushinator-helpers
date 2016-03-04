@@ -9,6 +9,7 @@ http://github.com/tedconf/js-crushinator-helpers
 import * as cropOption from './lib/crop-option';
 import {ParamBuilder} from './lib/param-builder';
 import {prepNumber} from './lib/preppers';
+import {warn} from './lib/log';
 
 /**
 A list of strings and regular expressions
@@ -118,6 +119,12 @@ export function crush(url, options={}) {
   // Apply host whitelist
   if (!crushable(url)) {
     return url;
+  }
+
+  // Complain about use of the deprecated string API
+  if (typeof options === 'string') {
+    warn('Sending Crushinator options as a query string is ' +
+        'deprecated. Please use the object format.');
   }
 
   // Stringify object options
