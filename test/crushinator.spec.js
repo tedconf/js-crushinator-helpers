@@ -77,9 +77,14 @@ describe('crushinator', function () {
   });
 
   describe('crush', function () {
-    const sandbox = sinon.sandbox.create();
+    let sandbox = sinon.sandbox.create();
+    let uncrushed;
+    let crushed;
 
     beforeEach(function () {
+      uncrushed = 'https://images.ted.com/image.jpg';
+      crushed = 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg';
+
       sandbox.spy(console, 'warn');
     });
 
@@ -87,8 +92,8 @@ describe('crushinator', function () {
       sandbox.restore();
     });
 
-    it('should warn about use of the deprecated query string format', function () {
-      crushinator.crush('http://images.ted.com/image.jpg', 'w=320');
+    it('should warn about deprecation of the deprecated query string format', function () {
+      crushinator.crush(uncrushed, 'w=320');
 
       sinon.assert.calledOnce(console.warn);
       sinon.assert.calledWith(console.warn,
@@ -96,41 +101,25 @@ describe('crushinator', function () {
         'deprecated. Please use the object format.');
     });
 
-    imageHosts.forEach(function (imageHost) {
-      it('should provide secure Crushinator URLs for images hosted on ' + imageHost, function () {
-        let url = '//' + imageHost + '/image.jpg';
-
-        assert.equal(
-          crushinator.crush('http:' + url, 'w=200'),
-          'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
-        );
-
-        assert.equal(
-          crushinator.crush('https:' + url, 'w=200'),
-          'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
-        );
-      });
-    });
-
     it('should return the original URL for images hosted outside the whitelist', function () {
       assert.equal(
-        crushinator.crush('http://celly.xxx/waffles.jpg', 'w=320'),
+        crushinator.crush('http://celly.xxx/waffles.jpg', { width: 320 }),
         'http://celly.xxx/waffles.jpg'
       );
     });
 
     it('should avoid double-crushing images', function () {
-      let url = 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320';
+      let url = crushed + '?w=320';
       assert.equal(
-        crushinator.crush(url, 'w=640'),
-        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640'
+        crushinator.crush(url, { width: 640 }),
+        crushed + '?w=640'
       );
     });
 
     it('should update old Crushinator URLs to the new host', function () {
       let url = 'https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg';
       assert.equal(
-        crushinator.crush(url, 'w=320'),
+        crushinator.crush(url, { width: 320 }),
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
       );
     });
@@ -144,20 +133,32 @@ describe('crushinator', function () {
       );
 
       assert.equal(
-        crushinator.crush(url, ''),
-        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
-      );
-
-      assert.equal(
         crushinator.crush(url, {}),
         'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
       );
     });
 
-    context('with POJO options', function () {
-      const uncrushed = 'https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg';
-      const crushed = 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg';
+    // Host tests
+    context('Host testing', function () {
+      imageHosts.forEach(function (imageHost) {
+        it('should provide secure Crushinator URLs for images hosted on ' + imageHost, function () {
+          let url = '//' + imageHost + '/image.jpg';
 
+          assert.equal(
+            crushinator.crush('http:' + url, { width: 200 }),
+            'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
+          );
+
+          assert.equal(
+            crushinator.crush('https:' + url, { width: 200 }),
+            'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
+          );
+        });
+      });
+    });
+
+    // Testing the options API
+    context('options API', function () {
       it('should recognize the width option', function () {
         assert.equal(
           crushinator.crush(uncrushed, { width: 300 }),
