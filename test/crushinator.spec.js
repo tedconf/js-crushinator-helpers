@@ -93,7 +93,10 @@ describe('crushinator', function () {
     });
 
     it('should warn about deprecation of the deprecated query string format', function () {
-      crushinator.crush(uncrushed, 'w=320');
+      assert.equal(
+        crushinator.crush(uncrushed, 'w=320'),
+        crushed + '?w=320'
+      );
 
       sinon.assert.calledOnce(console.warn);
       sinon.assert.calledWith(console.warn,
