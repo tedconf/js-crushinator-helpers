@@ -1,7 +1,5 @@
 'use strict';
 
-import {serialize} from './query-string';
-
 export class ParamBuilder {
 
   /**
@@ -37,7 +35,7 @@ export class ParamBuilder {
   /**
   Returns parameters in object form.
   */
-  get(values) {
+  parameterize(values) {
     const params = {};
 
     // Convert "crop-width" to crop.width etc.
@@ -60,10 +58,26 @@ export class ParamBuilder {
   }
 
   /**
-  Returns parameters in query string form.
+  Returns true if `optionName` looks like a valid option.
   */
-  serialize(values) {
-    return serialize(this.get(values));
+  hasOption(optionName) {
+    return this.options.hasOwnProperty(optionName.split('-').shift());
+  }
+
+  /**
+  Pass in an object and it returns a new one with the properties
+  that look like this ParamBuilder's options removed.
+  */
+  omitOptions(values) {
+    const pulled = {};
+
+    for (let key in values) {
+      if (!this.hasOption(key)) {
+        pulled[key] = values[key];
+      }
+    }
+
+    return pulled;
   }
 
 }
