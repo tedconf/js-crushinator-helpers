@@ -4,6 +4,7 @@
 
 * [#5](https://github.com/tedconf/js-crushinator-helpers/issues/5) Allow hyphenated form for Crushinator options
 * [#6](https://github.com/tedconf/js-crushinator-helpers/issues/6) Provide AMD-only distribution
+* [#8](https://github.com/tedconf/js-crushinator-helpers/issues/8) Accept custom query parameters in the options object
 
 [(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/129f407...master)
 
