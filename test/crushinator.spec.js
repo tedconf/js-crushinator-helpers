@@ -207,6 +207,13 @@ describe('crushinator', function () {
           crushed + '?c=320%2C240%2C250%2C150'
         );
       });
+
+      it('should append unrecognized properties as query parameters', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, { w: 640, u: { r: 3, s: 1 } }),
+          crushed + '?w=640&u%5Br%5D=3&u%5Bs%5D=1'
+        );
+      });
     });
   });
 });

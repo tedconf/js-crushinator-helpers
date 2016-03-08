@@ -9,6 +9,7 @@ http://github.com/tedconf/js-crushinator-helpers
 import * as cropOption from './lib/crop-option';
 import {ParamBuilder} from './lib/param-builder';
 import {prepNumber} from './lib/preppers';
+import {serialize} from './lib/query-string';
 
 /**
 A list of strings and regular expressions
@@ -121,8 +122,11 @@ export function crush(url, options={}) {
   }
 
   // Stringify object options
-  if (typeof options === 'object') { // or: everything is a duck
-    options = params.serialize(options);
+  if (typeof options === 'object') {
+    options = serialize(Object.assign(
+      params.omitOptions(options),  // = custom parameters
+      params.parameterize(options)  // = standard options
+    ));
   }
 
   return 'https://tedcdnpi-a.akamaihd.net/r/' +
