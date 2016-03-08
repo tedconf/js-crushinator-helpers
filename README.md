@@ -76,7 +76,7 @@ This is helpful for dealing with dynamic image URLs.
 
 #### crush options
 
-Some more detail and examples for individual Crushinator helper options:
+This section lists the image optimization options for which the JS helpers provide an API. Anything included in the options object that _isn't_ one of the options listed here will be appended to the Crushinator URL as a query parameter.
 
 ##### width
 
