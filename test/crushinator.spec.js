@@ -197,6 +197,18 @@ describe('crushinator', function () {
         );
       });
 
+      it('should recognize the custom params option', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            params: {
+              foo: 1,
+              bar: 'baz',
+            },
+          }),
+          crushed + '?foo=1&bar=baz'
+        );
+      });
+
       it('should recognize crop options in hyphenated form', function () {
         assert.equal(
           crushinator.crush(uncrushed, {
