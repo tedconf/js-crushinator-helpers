@@ -171,6 +171,18 @@ crushinator.crush('http://images.ted.com/image.jpg', {
   // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?quality=93'
 ```
 
+##### query
+
+The `query` option can be used to append custom query parameters to the Crushinator URL:
+
+```javascript
+crushinator.crush('http://images.ted.com/image.jpg', {
+    width: 200,
+    query: { c: '100,100' }
+  })
+  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200&c=100%2C100'
+```
+
 ### uncrush
 
 Restore a previously crushed URL to its original form.
