@@ -183,6 +183,8 @@ crushinator.crush('http://images.ted.com/image.jpg', {
   // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200&c=100%2C100'
 ```
 
+This allows you to directly apply [any of Crushinator's query parameters](https://github.com/tedconf/crushinator#usage) instead of using this helper's wrapper API.
+
 ### uncrush
 
 Restore a previously crushed URL to its original form.
