@@ -197,10 +197,10 @@ describe('crushinator', function () {
         );
       });
 
-      it('should recognize the custom params option', function () {
+      it('should recognize the custom query option', function () {
         assert.equal(
           crushinator.crush(uncrushed, {
-            params: {
+            query: {
               foo: 1,
               bar: 'baz',
             },

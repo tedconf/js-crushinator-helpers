@@ -125,7 +125,7 @@ export function crush(url, options={}) {
   if (typeof options === 'object') { // or: everything is a duck
     options = serialize(Object.assign(
       params.get(options),
-      options.params || {}
+      options.query || {}
     ));
   }
 
