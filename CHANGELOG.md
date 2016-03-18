@@ -1,6 +1,6 @@
 # Changelog
 
-### (Upcoming)
+### 2.2.0 (Upcoming)
 
 * [#5](https://github.com/tedconf/js-crushinator-helpers/issues/5) Allow hyphenated form for Crushinator options
 * [#6](https://github.com/tedconf/js-crushinator-helpers/issues/6) Provide AMD-only distribution
