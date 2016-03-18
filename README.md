@@ -153,7 +153,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
       afterResize: true
     }
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?quality=93'
+  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
 ```
 
 The above example would resize the original image to 640x480 and then take a 200x100 crop of the resized image, starting at 50x25.
@@ -168,7 +168,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
     'crop-x': 50, 'crop-y': 25,
     'crop-afterResize': true
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?quality=93'
+  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
 ```
 
 ##### query
