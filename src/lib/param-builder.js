@@ -1,7 +1,5 @@
 'use strict';
 
-import {serialize} from './query-string';
-
 export class ParamBuilder {
 
   /**
@@ -57,13 +55,6 @@ export class ParamBuilder {
     }
 
     return params;
-  }
-
-  /**
-  Returns parameters in query string form.
-  */
-  serialize(values) {
-    return serialize(this.get(values));
   }
 
 }
