@@ -25,7 +25,7 @@ bower install ted-crushinator-helpers
 
 ### Manual installation
 
-Code in `dist/crushinator.js` can be copied to your application.
+Code in `dist/crushinator.umd.min.js` can be copied to your application.
 
 ## API
 
@@ -250,7 +250,7 @@ Use [NVM](https://github.com/creationix/nvm) to make sure you have the correct N
 
 ### Releasing a new version
 
-1. `npm run build` to produce a new `dist/crushinator.js`
+1. `npm run build` to produce new JS in the `dist` directory
 2. Update "version" in `package.json` and commit
 3. `git tag` the new semver
 4. Push the master branch and new tag upstream to GitHub
