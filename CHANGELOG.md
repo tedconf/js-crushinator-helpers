@@ -1,6 +1,10 @@
 # Changelog
 
-### 2.2.0 (Upcoming)
+### (Upcoming)
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/e19749f...master)
+
+### 2.2.0
 
 * [#5](https://github.com/tedconf/js-crushinator-helpers/issues/5) Allow hyphenated form for Crushinator options
 * [#6](https://github.com/tedconf/js-crushinator-helpers/issues/6) Provide AMD-only distribution
@@ -8,7 +12,7 @@
 * [#7](https://github.com/tedconf/js-crushinator-helpers/issues/7) Deprecate direct use of string API for query params
 * Add `pe.tedcdn.com` to our hosts whitelist
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/129f407...master)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/129f407...e19749f)
 
 ### 2.1.0
 
