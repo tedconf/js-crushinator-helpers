@@ -7,6 +7,7 @@ import * as crushinator from '../src/crushinator';
 const imageHosts = [
   'assets.tedcdn.com',
   'pb-assets.tedcdn.com',
+  'pe.tedcdn.com',
   'assets2.tedcdn.com',
   'tedcdnpf-a.akamaihd.net',
   'tedcdnpa-a.akamaihd.net',
