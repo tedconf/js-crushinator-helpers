@@ -2,6 +2,8 @@
 
 ### (Upcoming)
 
+* [#11](https://github.com/tedconf/js-crushinator-helpers/issues/11) Accommodate Crushinator's move to `pi.tedcdn.com`
+
 [(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/e19749f...master)
 
 ### 2.2.0
