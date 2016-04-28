@@ -231,7 +231,7 @@ var cropOption = Object.freeze({
   @returns {string}
   */
   function uncrush(url) {
-    var parts = url.match(/(.+)?\/\/(?:img(?:-ssl)?\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
+    var parts = url.match(/(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
 
     // Avoid double-crushing images
     if (parts) {
@@ -246,7 +246,7 @@ var cropOption = Object.freeze({
   specified options string:
 
       crush('http://images.ted.com/image.jpg', 'w=320')
-        => 'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320'
+        => 'https://pi.tedcdn.com/images.ted.com/image.jpg?w=320'
 
   @public
   @param {string} url - URL of image to be optimized.
@@ -290,7 +290,7 @@ var cropOption = Object.freeze({
       options = serialize(Object.assign(params.get(options), options.query || {}));
     }
 
-    return 'https://tedcdnpi-a.akamaihd.net/r/' + url.replace(/.*\/\//, '') + (options ? '?' + options : '');
+    return 'https://pi.tedcdn.com/r/' + url.replace(/.*\/\//, '') + (options ? '?' + options : '');
   }
 
   exports.crushable = crushable;
