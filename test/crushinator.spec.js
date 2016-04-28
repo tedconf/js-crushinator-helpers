@@ -31,6 +31,7 @@ const crushinatorHosts = [
   'img.tedcdn.com',
   'img-ssl.tedcdn.com',
   'tedcdnpi-a.akamaihd.net',
+  'pi.tedcdn.com',
 ];
 
 describe('crushinator', function () {
@@ -50,7 +51,7 @@ describe('crushinator', function () {
 
   describe('uncrush', function () {
     crushinatorHosts.forEach(function (crushinatorHost) {
-      it('should revert images that were hosted on ' + crushinatorHost, function () {
+      it('should revert images that were crushed by ' + crushinatorHost, function () {
         imageHosts.forEach(function (imageHost) {
           let url =
             '//' + crushinatorHost + '/r/' +
@@ -84,7 +85,7 @@ describe('crushinator', function () {
 
     beforeEach(function () {
       uncrushed = 'https://images.ted.com/image.jpg';
-      crushed = 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg';
+      crushed = 'https://pi.tedcdn.com/r/images.ted.com/image.jpg';
 
       sandbox.spy(console, 'warn');
     });
@@ -124,7 +125,7 @@ describe('crushinator', function () {
       let url = 'https://img-ssl.tedcdn.com/r/images.ted.com/image.jpg';
       assert.equal(
         crushinator.crush(url, { width: 320 }),
-        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+        'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
       );
     });
 
@@ -133,12 +134,12 @@ describe('crushinator', function () {
 
       assert.equal(
         crushinator.crush(url),
-        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
+        'https://pi.tedcdn.com/r/images.ted.com/image.jpg'
       );
 
       assert.equal(
         crushinator.crush(url, {}),
-        'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg'
+        'https://pi.tedcdn.com/r/images.ted.com/image.jpg'
       );
     });
 
@@ -150,12 +151,12 @@ describe('crushinator', function () {
 
           assert.equal(
             crushinator.crush('http:' + url, { width: 200 }),
-            'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
+            'https://pi.tedcdn.com/r/' + imageHost + '/image.jpg?w=200'
           );
 
           assert.equal(
             crushinator.crush('https:' + url, { width: 200 }),
-            'https://tedcdnpi-a.akamaihd.net/r/' + imageHost + '/image.jpg?w=200'
+            'https://pi.tedcdn.com/r/' + imageHost + '/image.jpg?w=200'
           );
         });
       });

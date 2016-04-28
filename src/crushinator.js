@@ -76,7 +76,7 @@ Restore a previously crushed URL to its original form.
 */
 export function uncrush(url) {
   const parts = url.match(
-    /(.+)?\/\/(?:img(?:-ssl)?\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/
+    /(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/
   );
 
   // Avoid double-crushing images
@@ -92,7 +92,7 @@ Returns a version of the image URL that uses Crushinator with the
 specified options string:
 
     crush('http://images.ted.com/image.jpg', 'w=320')
-      => 'https://tedcdnpi-a.akamaihd.net/images.ted.com/image.jpg?w=320'
+      => 'https://pi.tedcdn.com/images.ted.com/image.jpg?w=320'
 
 @public
 @param {string} url - URL of image to be optimized.
@@ -137,7 +137,7 @@ export function crush(url, options={}) {
     ));
   }
 
-  return 'https://tedcdnpi-a.akamaihd.net/r/' +
+  return 'https://pi.tedcdn.com/r/' +
     url.replace(/.*\/\//, '') +
     (options ? '?' + options : '');
 }
