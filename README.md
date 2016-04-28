@@ -4,7 +4,7 @@ JavaScript methods to produce [Crushinator](https://github.com/tedconf/crushinat
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { width: 320 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
 ```
 
 ## Installation
@@ -62,7 +62,7 @@ Example use:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { width:  320 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
 ```
 
 Crushinator only operates on images hosted on whiteslisted domains. If you use the `crush` method on an image outside of that whitelist, it will simply return the original URL:
@@ -94,7 +94,7 @@ Example:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { width: 320 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
 ```
 
 ##### height
@@ -113,7 +113,7 @@ Example:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { height: 240 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?h=240'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?h=240'
 ```
 
 ##### quality
@@ -126,7 +126,7 @@ Example:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { quality: 93 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?quality=93'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?quality=93'
 ```
 
 ##### crop
@@ -153,7 +153,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
       afterResize: true
     }
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
 ```
 
 The above example would resize the original image to 640x480 and then take a 200x100 crop of the resized image, starting at 50x25.
@@ -168,7 +168,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
     'crop-x': 50, 'crop-y': 25,
     'crop-afterResize': true
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
 ```
 
 ##### query
@@ -180,7 +180,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
     width: 200,
     query: { c: '100,100' }
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200&c=100%2C100'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=200&c=100%2C100'
 ```
 
 This allows you to directly apply [any of Crushinator's query parameters](https://github.com/tedconf/crushinator#usage) instead of using this helper's wrapper API.
@@ -202,7 +202,7 @@ crushinator.uncrush ( url )
 Example:
 
 ```javascript
-crushinator.uncrush('https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320')
+crushinator.uncrush('https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320')
   // => 'https://images.ted.com/image.jpg'
 ```
 
