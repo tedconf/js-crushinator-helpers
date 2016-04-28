@@ -6,6 +6,7 @@
 * [#6](https://github.com/tedconf/js-crushinator-helpers/issues/6) Provide AMD-only distribution
 * [#9](https://github.com/tedconf/js-crushinator-helpers/issues/9) Add option for custom query parameters
 * [#7](https://github.com/tedconf/js-crushinator-helpers/issues/7) Deprecate direct use of string API for query params
+* Add `pe.tedcdn.com` to our hosts whitelist
 
 [(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/129f407...master)
 
