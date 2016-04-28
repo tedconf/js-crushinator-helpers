@@ -2,9 +2,13 @@
 
 ### (Upcoming)
 
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/ea6c48c...master)
+
+### 2.3.0
+
 * [#11](https://github.com/tedconf/js-crushinator-helpers/issues/11) Accommodate Crushinator's move to `pi.tedcdn.com`
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/e19749f...master)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/e19749f...ea6c48c)
 
 ### 2.2.0
 
