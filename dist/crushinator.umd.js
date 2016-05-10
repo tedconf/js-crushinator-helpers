@@ -215,7 +215,7 @@ var cropOption = Object.freeze({
   @returns {string}
   */
   function extractHost(url) {
-    return url.replace(/.*\/\/([^\/]+).*/, '$1');
+    return String(url).replace(/.*\/\/([^\/]+).*/, '$1');
   }
 
   /**
@@ -235,7 +235,7 @@ var cropOption = Object.freeze({
   @returns {string}
   */
   function uncrush(url) {
-    var parts = url.match(/(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
+    var parts = String(url).match(/(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
 
     // Avoid double-crushing images
     if (parts) {
