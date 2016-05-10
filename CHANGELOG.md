@@ -2,13 +2,19 @@
 
 ### (Upcoming)
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/ea6c48c...master)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/50d2beb...master)
+
+### 2.3.1
+
+* [#12](https://github.com/tedconf/js-crushinator-helpers/issues/12) Gracefully handle invalid input values
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/ecfe982...50d2beb)
 
 ### 2.3.0
 
 * [#11](https://github.com/tedconf/js-crushinator-helpers/issues/11) Accommodate Crushinator's move to `pi.tedcdn.com`
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/e19749f...ea6c48c)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/fe06606...ea6c48c)
 
 ### 2.2.0
 
@@ -18,7 +24,7 @@
 * [#7](https://github.com/tedconf/js-crushinator-helpers/issues/7) Deprecate direct use of string API for query params
 * Add `pe.tedcdn.com` to our hosts whitelist
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/129f407...e19749f)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/03b3c08...e19749f)
 
 ### 2.1.0
 
