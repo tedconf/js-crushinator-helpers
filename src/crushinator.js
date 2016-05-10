@@ -55,7 +55,7 @@ Returns the portion of input URL that corresponds to the host name.
 @returns {string}
 */
 function extractHost(url) {
-  return url.replace(/.*\/\/([^\/]+).*/, '$1');
+  return String(url).replace(/.*\/\/([^\/]+).*/, '$1');
 }
 
 /**
@@ -75,7 +75,7 @@ Restore a previously crushed URL to its original form.
 @returns {string}
 */
 export function uncrush(url) {
-  const parts = url.match(
+  const parts = String(url).match(
     /(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/
   );
 

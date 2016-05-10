@@ -47,6 +47,11 @@ describe('crushinator', function () {
       assert(!crushinator.crushable('http://test.com/images/test.jpg'));
       assert(!crushinator.crushable('https://test.com/images/test.jpg'));
     });
+
+    it('should uncomplainingly disconfirm incoherent values', function () {
+      assert(!crushinator.crushable(undefined));
+      assert(!crushinator.crushable(Infinity));
+    });
   });
 
   describe('uncrush', function () {
@@ -76,6 +81,11 @@ describe('crushinator', function () {
         'http://test.com/images/test.jpg'
       );
     });
+
+    it('should politely pass on uncrushing incoherent values', function () {
+      assert.equal(crushinator.uncrush(undefined), undefined);
+      assert.equal(crushinator.uncrush(Infinity), Infinity);
+    });
   });
 
   describe('crush', function () {
@@ -92,6 +102,11 @@ describe('crushinator', function () {
 
     afterEach(function () {
       sandbox.restore();
+    });
+
+    it('should politely pass on crushing incoherent values', function () {
+      assert.equal(crushinator.crush(undefined), undefined);
+      assert.equal(crushinator.crush(Infinity), Infinity);
     });
 
     it('should warn about deprecation of the deprecated query string format', function () {
