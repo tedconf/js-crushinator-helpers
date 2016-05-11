@@ -251,7 +251,8 @@ Use [NVM](https://github.com/creationix/nvm) to make sure you have the correct N
 ### Releasing a new version
 
 1. `npm run build` to produce new JS in the `dist` directory
-2. Update "version" in `package.json` and commit
-3. `git tag` the new semver
-4. Push the master branch and new tag upstream to GitHub
-5. [`npm publish`](https://docs.npmjs.com/getting-started/publishing-npm-packages) the updated node module
+2. Update "version" in `package.json`
+3. Add details of the new release to `CHANGELOG.md`
+4. `git tag` the new semver
+5. Push the master branch and new tag upstream to GitHub
+6. [`npm publish`](https://docs.npmjs.com/getting-started/publishing-npm-packages) the updated node module
