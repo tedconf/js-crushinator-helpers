@@ -31,6 +31,20 @@ define('crushinator', ['exports'], function (exports) { 'use strict';
     };
   }();
 
+  babelHelpers.extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
   babelHelpers;
 
   /**
@@ -287,7 +301,7 @@ var cropOption = Object.freeze({
     // Stringify object options
     if ((typeof options === 'undefined' ? 'undefined' : babelHelpers.typeof(options)) === 'object') {
       // or: everything is a duck
-      options = serialize(Object.assign(params.get(options), options.query || {}));
+      options = serialize(babelHelpers.extends(params.get(options), options.query || {}));
     }
 
     return 'https://pi.tedcdn.com/r/' + url.replace(/.*\/\//, '') + (options ? '?' + options : '');
