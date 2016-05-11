@@ -2,6 +2,8 @@
 
 ### (Upcoming)
 
+* [#13](https://github.com/tedconf/js-crushinator-helpers/pull/13) Add Object.assign polyfill
+
 [(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/50d2beb...master)
 
 ### 2.3.1
