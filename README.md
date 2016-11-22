@@ -1,33 +1,41 @@
 # JS Crushinator Helpers [![NPM Version](https://img.shields.io/npm/v/ted-crushinator-helpers.svg?style=flat)](https://npmjs.org/package/ted-crushinator-helpers) [![Build Status](https://travis-ci.org/tedconf/js-crushinator-helpers.svg?branch=master)](https://travis-ci.org/tedconf/js-crushinator-helpers)
 
-JavaScript methods to produce [Crushinator](https://github.com/tedconf/crushinator)-optimized image URLs.
+Helper methods to create [Crushinator-optimized](https://github.com/tedconf/crushinator) image URLs with JavaScript:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { width: 320 })
   // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
 ```
 
-## Installation
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contributors' instructions.
 
-The Crushinator helpers are distributed in [UMD](https://github.com/umdjs/umd) and have no other dependencies, so they can be imported as an AMD or as a CommonJS (Node) module. If no module system is available, the library will occupy the `crushinator` namespace in your app's global (e.g. `window.crushinator`).
+## Installing
+
+This section describes how to add these helpers to your project.
 
 ### Install with NPM
 
 ```
-npm install ted-crushinator-helpers
+npm install --save ted-crushinator-helpers
 ```
 
 ### Install with Bower
 
 ```
-bower install ted-crushinator-helpers
+bower install --save ted-crushinator-helpers
 ```
 
 ### Manual installation
 
-Code in `dist/crushinator.umd.min.js` can be copied to your application.
+The code in `dist/crushinator.umd.min.js` can be copied to your application.
 
-## API
+### Installation for module systems
+
+This library is distributed as [UMD](https://github.com/umdjs/umd) and has no other dependencies, so it can be imported into pretty much any module system.
+
+If no module system is available, the library will occupy the `crushinator` namespace in your app's global object (e.g. `window.crushinator`).
+
+## Using
 
 This library provides the following methods:
 
@@ -38,6 +46,8 @@ This library provides the following methods:
 	* [crop](#crop)
 * [`uncrush(url)`](#uncrush)
 * [`crushable(url)`](#crushable)
+
+Here are descriptions and examples for each of these methods:
 
 ### crush
 
@@ -233,26 +243,3 @@ crushinator.crushable('http://images.ted.com/image.jpg')
 crushinator.crushable('http://celly.xxx/waffles.jpg')
   // => false
 ```
-
-## Contributing
-
-### Setup
-
-Use [NVM](https://github.com/creationix/nvm) to make sure you have the correct Node version installed for local development.
-
-* `git clone git@github.com:tedconf/js-crushinator-helpers.git`
-* Change into the new directory
-* `npm install`
-
-### Running tests
-
-`npm test` will lint and test the library.
-
-### Releasing a new version
-
-1. `npm run build` to produce new JS in the `dist` directory
-2. Update "version" in `package.json`
-3. Add details of the new release to `CHANGELOG.md`
-4. `git tag` the new semver
-5. Push the master branch and new tag upstream to GitHub
-6. [`npm publish`](https://docs.npmjs.com/getting-started/publishing-npm-packages) the updated node module
