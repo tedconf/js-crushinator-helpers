@@ -12,7 +12,7 @@
     "build": "node build",
     "lint": "jshint . && jscs .",
     "pretest": "npm run lint",
-    "test": "mocha"
+    "test": "mocha --colors"
   },
   "dependencies": {},
   "devDependencies": {
