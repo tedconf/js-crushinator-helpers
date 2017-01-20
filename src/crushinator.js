@@ -6,9 +6,7 @@ http://github.com/tedconf/js-crushinator-helpers
 
 'use strict';
 
-import * as cropOption from './lib/crop-option';
-import {ParamBuilder} from './lib/param-builder';
-import {prepNumber} from './lib/preppers';
+import {parameterize} from './lib/parameterize';
 import {serialize} from './lib/query-string';
 import {warn} from './lib/log';
 
@@ -36,16 +34,6 @@ const imageHosts = [
   'ems.ted.com',
   'ems-staging.ted.com',
 ];
-
-/**
-Possible options parameters for Crushinator.
-*/
-const params = new ParamBuilder({
-  width: { param: 'w', filter: prepNumber },
-  height: { param: 'h', filter: prepNumber },
-  quality: { param: 'quality', filter: prepNumber },
-  crop: cropOption,
-});
 
 /**
 Returns the portion of input URL that corresponds to the host name.
@@ -138,10 +126,9 @@ export function crush(url, options={}) {
 
   // Stringify object options
   if (typeof options === 'object') { // or: everything is a duck
-    options = serialize(Object.assign(
-      params.get(options),
-      options.query || {}
-    ));
+    options = serialize(
+      parameterize(options)
+    );
   }
 
   return config.host + '/r/' +
