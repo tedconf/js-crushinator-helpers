@@ -36,3 +36,5 @@ export function dehyphenate(values) {
 
   return dehyphenated;
 }
+
+export default dehyphenate;
