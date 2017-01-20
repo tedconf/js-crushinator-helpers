@@ -177,6 +177,23 @@ describe('crushinator', function () {
       });
     });
 
+    // Testing configuration overrides
+    context('with configurations', function () {
+      const defaults = Object.assign({}, crushinator.config);
+
+      afterEach(function () {
+        Object.assign(crushinator.config, defaults);
+      });
+
+      it('should use the crushinator host override', function () {
+        crushinator.config.host = 'https://example.com';
+        assert.equal(
+          crushinator.crush('https://images.ted.com/image.jpg'),
+          'https://example.com/r/images.ted.com/image.jpg'
+        );
+      });
+    });
+
     // Testing the options API
     context('options API', function () {
       it('should recognize the width option', function () {

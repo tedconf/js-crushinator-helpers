@@ -59,6 +59,13 @@ function extractHost(url) {
 }
 
 /**
+Overridable global configuration options.
+*/
+export const config = {
+  host: 'https://pi.tedcdn.com',
+};
+
+/**
 Check to see if a URL passes Crushinator's host whitelist.
 
 @param {string} url - URL of image to check.
@@ -137,7 +144,7 @@ export function crush(url, options={}) {
     ));
   }
 
-  return 'https://pi.tedcdn.com/r/' +
+  return config.host + '/r/' +
     url.replace(/.*\/\//, '') +
     (options ? '?' + options : '');
 }
