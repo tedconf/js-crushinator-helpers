@@ -5,6 +5,7 @@ Convert options to a parameters object.
 'use strict';
 
 import * as crop from './crop-option';
+import {fit} from './fit-option';
 import {dehyphenate} from './dehyphenate';
 import {prepNumber} from './preppers';
 
@@ -28,6 +29,10 @@ export function parameterize(options) {
 
         case 'quality':
           params.quality = prepNumber(value);
+          break;
+
+        case 'fit':
+          Object.assign(params, fit(options));
           break;
 
         case 'crop':

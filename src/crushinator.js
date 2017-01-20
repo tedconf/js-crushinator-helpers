@@ -96,6 +96,8 @@ specified options string:
 @param {number} [options.height] - Target image height in pixels.
 @param {number} [options.quality] - Image quality as a percentage
     (0-100).
+@param {boolean} [options.fit] - Will zoom and crop the image
+    for best fit into the target dimensions.
 @param {Object} [options.crop] - Image crop configuration.
 @param {number} [options.crop.width] - Width of cropped section
     in pixels.

@@ -256,6 +256,16 @@ describe('crushinator', function () {
         );
       });
 
+      it('should recognize the fit option', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            width: 320, height: 240,
+            fit: true,
+          }),
+          crushed + '?w=320&h=240&op=%5E&gravity=c&c=320%2C240'
+        );
+      });
+
       it('should recognize the custom query option', function () {
         assert.equal(
           crushinator.crush(uncrushed, {
