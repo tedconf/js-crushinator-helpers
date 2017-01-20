@@ -98,6 +98,9 @@ specified options string:
     (0-100).
 @param {boolean} [options.fit] - Will zoom and crop the image
     for best fit into the target dimensions.
+@param {string} [options.align] - If cropping occurs, the image
+    can be aligned to the "top", "bottom", "left", "right", or
+    "middle" of the crop frame.
 @param {Object} [options.crop] - Image crop configuration.
 @param {number} [options.crop.width] - Width of cropped section
     in pixels.

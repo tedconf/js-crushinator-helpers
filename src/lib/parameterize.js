@@ -35,6 +35,17 @@ export function parameterize(options) {
           Object.assign(params, fit(options));
           break;
 
+        case 'align':
+          params.gravity = {
+            top: 'n',
+            left: 'w',
+            center: 'c',
+            middle: 'c',
+            right: 'e',
+            bottom: 's',
+          }[value] || 'c';
+          break;
+
         case 'crop':
           params[crop.param(value)] = crop.filter(value);
           break;

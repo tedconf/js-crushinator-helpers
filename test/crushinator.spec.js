@@ -266,6 +266,33 @@ describe('crushinator', function () {
         );
       });
 
+      it('should recognize the align option', function () {
+        assert.equal(
+          crushinator.crush(uncrushed, { align: 'top', }),
+          crushed + '?gravity=n'
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, { align: 'bottom', }),
+          crushed + '?gravity=s'
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, { align: 'left', }),
+          crushed + '?gravity=w'
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, { align: 'right', }),
+          crushed + '?gravity=e'
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, { align: 'middle', }),
+          crushed + '?gravity=c'
+        );
+      });
+
       it('should recognize the custom query option', function () {
         assert.equal(
           crushinator.crush(uncrushed, {
