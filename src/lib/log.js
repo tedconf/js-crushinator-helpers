@@ -2,8 +2,6 @@
 Wrapper methods for logging errors and other notices.
 */
 
-'use strict';
-
 /**
 True if we can send messages to the console.
 */
@@ -13,7 +11,7 @@ const isConsolable = typeof console === 'object';
 Throw an honest-to-goodness error.
 */
 export function error(message) {
-  throw(new Error(message));
+  throw new Error(message);
 }
 
 /**
