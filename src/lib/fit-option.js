@@ -3,9 +3,7 @@ Given an options object, returns the parameters required to
 resize the image for best fit if applicable.
 */
 
-'use strict';
-
-import {prepNumber} from './preppers';
+import { prepNumber } from './preppers';
 
 export function fit(options) {
   const params = {};
@@ -14,10 +12,7 @@ export function fit(options) {
     Object.assign(params, {
       op: '^',
       gravity: 'c',
-      c: (
-        prepNumber(options.width) + ',' +
-        prepNumber(options.height)
-      ),
+      c: `${prepNumber(options.width)},${prepNumber(options.height)}`,
     });
   }
 

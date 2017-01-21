@@ -4,11 +4,9 @@ Library of simple JS methods to produce crushed image URLs.
 http://github.com/tedconf/js-crushinator-helpers
 */
 
-'use strict';
-
-import {parameterize} from './lib/parameterize';
-import {serialize} from './lib/query-string';
-import {warn} from './lib/log';
+import { parameterize } from './lib/parameterize';
+import { serialize } from './lib/query-string';
+import { warn } from './lib/log';
 
 /**
 A list of strings and regular expressions
@@ -43,7 +41,7 @@ Returns the portion of input URL that corresponds to the host name.
 @returns {string}
 */
 function extractHost(url) {
-  return String(url).replace(/.*\/\/([^\/]+).*/, '$1');
+  return String(url).replace(/.*\/\/([^/]+).*/, '$1');
 }
 
 /**
@@ -70,13 +68,11 @@ Restore a previously crushed URL to its original form.
 @returns {string}
 */
 export function uncrush(url) {
-  const parts = String(url).match(
-    /(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/
-  );
+  const parts = String(url).match(/(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
 
   // Avoid double-crushing images
   if (parts) {
-    return uncrush(parts[1] + '//' + parts[2]);
+    return uncrush(`${parts[1]}//${parts[2]}`);
   }
 
   return url;
@@ -114,31 +110,30 @@ specified options string:
     take place after the image has been resized.
 @returns {string}
 */
-export function crush(url, options={}) {
+export function crush(url, options = {}) {
   // Avoid double-crushing the image
-  url = uncrush(url);
+  const uncrushed = uncrush(url);
 
   // Apply host whitelist
-  if (!crushable(url)) {
-    return url;
+  if (!crushable(uncrushed)) {
+    return uncrushed;
   }
+
+  let params = {};
 
   // Complain about use of the deprecated string API
   if (typeof options === 'string') {
     warn('Sending Crushinator options as a query string is ' +
         'deprecated. Please use the object format.');
+    params = options;
   }
 
   // Stringify object options
-  if (typeof options === 'object') { // or: everything is a duck
-    options = serialize(
-      parameterize(options)
-    );
+  if (typeof options === 'object') {
+    params = serialize(parameterize(options));
   }
 
-  return config.host + '/r/' +
-    url.replace(/.*\/\//, '') +
-    (options ? '?' + options : '');
+  return `${config.host}/r/${uncrushed.replace(/.*\/\//, '')}${params ? `?${params}` : ''}`;
 }
 
 export default crush;

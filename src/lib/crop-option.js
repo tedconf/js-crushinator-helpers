@@ -2,9 +2,7 @@
 ParamBuilder option for the Crushinator crop controller.
 */
 
-'use strict';
-
-import {prepNumber} from './preppers';
+import { prepNumber } from './preppers';
 
 export function param(cropOptions) {
   return cropOptions.afterResize ? 'c' : 'precrop';
@@ -17,8 +15,8 @@ export function filter(cropOptions) {
   data.push(prepNumber(cropOptions.height));
 
   if (
-    cropOptions.hasOwnProperty('x') ||
-    cropOptions.hasOwnProperty('y')
+    Object.prototype.hasOwnProperty.call(cropOptions, 'x') ||
+    Object.prototype.hasOwnProperty.call(cropOptions, 'y')
   ) {
     data.push(prepNumber(cropOptions.x));
     data.push(prepNumber(cropOptions.y));
