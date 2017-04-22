@@ -14,7 +14,13 @@ A list of strings and regular expressions
 const imageHosts = [
   'assets.tedcdn.com',
   'pb-assets.tedcdn.com',
+  'pa.tedcdn.com',
   'pe.tedcdn.com',
+  'pf.tedcdn.com',
+  'ph.tedcdn.com',
+  'pj.tedcdn.com',
+  'pk.tedcdn.com',
+  'pl.tedcdn.com',
   'assets2.tedcdn.com',
   'tedcdnpf-a.akamaihd.net',
   'tedcdnpa-a.akamaihd.net',
