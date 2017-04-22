@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.4.0
+
+* [#14](https://github.com/tedconf/js-crushinator-helpers/issues/14) Allow host override for local testing
+* [#15](https://github.com/tedconf/js-crushinator-helpers/issues/15) Add "fit" option
+* [#17](https://github.com/tedconf/js-crushinator-helpers/issues/17) Additional image hosts
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/e0c9c11...e8c1b57)
+
 ### 2.3.2
 
 * [#13](https://github.com/tedconf/js-crushinator-helpers/pull/13) Add `Object.assign` polyfill

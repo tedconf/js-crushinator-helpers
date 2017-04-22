@@ -1,6 +1,6 @@
 {
   "name": "ted-crushinator-helpers",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "JS methods to produce crushinator'd image URLs.",
   "license": "MIT",
   "main": "dist/crushinator.umd.min.js",
