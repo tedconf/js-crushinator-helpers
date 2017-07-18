@@ -46,6 +46,19 @@ export function parameterize(incoming) {
         params[crop.param(value)] = crop.filter(value);
         break;
 
+      case 'blur':
+        params.blur = `${prepNumber(value.radius)},${prepNumber(value.sigma)}`;
+        break;
+
+      case 'gamma':
+        params.gamma = `${prepNumber(value.red)},${prepNumber(value.green)},${prepNumber(value.blue)}`;
+        break;
+
+      case 'grayscale':
+      case 'greyscale':
+        params.grayscale = prepNumber(value);
+        break;
+
       case 'query':
         Object.assign(params, value || {});
         break;
