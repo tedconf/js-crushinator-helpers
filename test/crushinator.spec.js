@@ -328,39 +328,39 @@ describe('crushinator', () => {
         );
       });
 
-      it('should recognize the blur option', function () {
+      it('should recognize the blur option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
             blur: { radius: 2, sigma: 10 },
           }),
-          crushed + '?blur=2%2C10'
+          `${crushed}?blur=2%2C10`,
         );
       });
 
-      it('should recognize the gamma option', function () {
+      it('should recognize the gamma option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
             gamma: { red: 50, green: 10, blue: 10 },
           }),
-          crushed + '?gamma=50%2C10%2C10'
+          `${crushed}?gamma=50%2C10%2C10`,
         );
       });
 
-      it('should recognize the grayscale option', function () {
+      it('should recognize the grayscale option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
             grayscale: 90,
           }),
-          crushed + '?grayscale=90'
+          `${crushed}?grayscale=90`,
         );
       });
 
-      it('should recognize the unsharp option', function () {
+      it('should recognize the unsharp option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
             unsharp: { radius: 2, sigma: 0.5, amount: 0.8, threshold: 0 },
           }),
-          crushed + '?u[r]=2&u[s]=0.5&u[a]=0.8&u[t]=0'
+          `${crushed}?u[r]=2&u[s]=0.5&u[a]=0.8&u[t]=0`,
         );
       });
     });
