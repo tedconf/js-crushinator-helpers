@@ -1,33 +1,41 @@
 # JS Crushinator Helpers [![NPM Version](https://img.shields.io/npm/v/ted-crushinator-helpers.svg?style=flat)](https://npmjs.org/package/ted-crushinator-helpers) [![Build Status](https://travis-ci.org/tedconf/js-crushinator-helpers.svg?branch=master)](https://travis-ci.org/tedconf/js-crushinator-helpers)
 
-JavaScript methods to produce [Crushinator](https://github.com/tedconf/crushinator)-optimized image URLs.
+Helper methods to create [Crushinator-optimized](https://github.com/tedconf/crushinator) image URLs with JavaScript:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { width: 320 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
 ```
 
-## Installation
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contributors' instructions.
 
-The Crushinator helpers are distributed in [UMD](https://github.com/umdjs/umd) and have no other dependencies, so they can be imported as an AMD or as a CommonJS (Node) module. If no module system is available, the library will occupy the `crushinator` namespace in your app's global (e.g. `window.crushinator`).
+## Installing
+
+This section describes how to add these helpers to your project.
 
 ### Install with NPM
 
 ```
-npm install ted-crushinator-helpers
+npm install --save ted-crushinator-helpers
 ```
 
 ### Install with Bower
 
 ```
-bower install ted-crushinator-helpers
+bower install --save ted-crushinator-helpers
 ```
 
 ### Manual installation
 
-Code in `dist/crushinator.umd.min.js` can be copied to your application.
+The code in `dist/crushinator.umd.min.js` can be copied to your application.
 
-## API
+### Installation for module systems
+
+This library is distributed as [UMD](https://github.com/umdjs/umd) and has no other dependencies, so it can be imported into pretty much any module system.
+
+If no module system is available, the library will occupy the `crushinator` namespace in your app's global object (e.g. `window.crushinator`).
+
+## Using
 
 This library provides the following methods:
 
@@ -38,6 +46,8 @@ This library provides the following methods:
 	* [crop](#crop)
 * [`uncrush(url)`](#uncrush)
 * [`crushable(url)`](#crushable)
+
+Here are descriptions and examples for each of these methods:
 
 ### crush
 
@@ -62,7 +72,7 @@ Example use:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { width:  320 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
 ```
 
 Crushinator only operates on images hosted on whiteslisted domains. If you use the `crush` method on an image outside of that whitelist, it will simply return the original URL:
@@ -94,7 +104,7 @@ Example:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { width: 320 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320'
 ```
 
 ##### height
@@ -113,7 +123,7 @@ Example:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { height: 240 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?h=240'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?h=240'
 ```
 
 ##### quality
@@ -126,7 +136,7 @@ Example:
 
 ```javascript
 crushinator.crush('http://images.ted.com/image.jpg', { quality: 93 })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?quality=93'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?quality=93'
 ```
 
 ##### crop
@@ -153,7 +163,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
       afterResize: true
     }
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
 ```
 
 The above example would resize the original image to 640x480 and then take a 200x100 crop of the resized image, starting at 50x25.
@@ -168,7 +178,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
     'crop-x': 50, 'crop-y': 25,
     'crop-afterResize': true
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=640&h=480&c=200%2C100%2C50%2C25'
 ```
 
 ##### query
@@ -180,7 +190,7 @@ crushinator.crush('http://images.ted.com/image.jpg', {
     width: 200,
     query: { c: '100,100' }
   })
-  // => 'https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=200&c=100%2C100'
+  // => 'https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=200&c=100%2C100'
 ```
 
 This allows you to directly apply [any of Crushinator's query parameters](https://github.com/tedconf/crushinator#usage) instead of using this helper's wrapper API.
@@ -202,7 +212,7 @@ crushinator.uncrush ( url )
 Example:
 
 ```javascript
-crushinator.uncrush('https://tedcdnpi-a.akamaihd.net/r/images.ted.com/image.jpg?w=320')
+crushinator.uncrush('https://pi.tedcdn.com/r/images.ted.com/image.jpg?w=320')
   // => 'https://images.ted.com/image.jpg'
 ```
 
@@ -233,25 +243,3 @@ crushinator.crushable('http://images.ted.com/image.jpg')
 crushinator.crushable('http://celly.xxx/waffles.jpg')
   // => false
 ```
-
-## Contributing
-
-### Setup
-
-Use [NVM](https://github.com/creationix/nvm) to make sure you have the correct Node version installed for local development.
-
-* `git clone git@github.com:tedconf/js-crushinator-helpers.git`
-* Change into the new directory
-* `npm install`
-
-### Running tests
-
-`npm test` will lint and test the library.
-
-### Releasing a new version
-
-1. `npm run build` to produce new JS in the `dist` directory
-2. Update "version" in `package.json` and commit
-3. `git tag` the new semver
-4. Push the master branch and new tag upstream to GitHub
-5. [`npm publish`](https://docs.npmjs.com/getting-started/publishing-npm-packages) the updated node module

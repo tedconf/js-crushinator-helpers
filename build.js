@@ -8,18 +8,23 @@ var fs = require('fs');
 // Set up Babel configuration
 var babelConfig = JSON.parse(fs.readFileSync('.babelrc', 'utf8'));
 babelConfig.babelrc = false;
-babelConfig.presets = ['es2015-rollup'];
+babelConfig.plugins.push('external-helpers');
+babelConfig.presets = [
+  ['es2015', { modules: false }]
+];
 
 function writeBundle(bundle, suffix) {
   bundle.write({
     dest: 'dist/crushinator.umd' + suffix + '.js',
     format: 'umd',
+    exports: 'named',
     moduleName: 'crushinator',
   });
 
   bundle.write({
     dest: 'dist/crushinator.amd' + suffix + '.js',
     format: 'amd',
+    exports: 'named',
     moduleId: 'crushinator',
   });
 }

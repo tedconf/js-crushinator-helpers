@@ -1,12 +1,12 @@
 .babelrc
 .editorconfig
+.eslintrc.json
 .gitignore
-.jscsrc
-.jshintignore
-.jshintrc
 .npmignore
 .nvmrc
 .travis.yml
 test/
 bower.json
 build.js
+CONTRIBUTING.md
+Jenkinsfile

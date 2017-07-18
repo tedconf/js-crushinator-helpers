@@ -3,9 +3,7 @@ Methods used by stringifyOptions to prepare Crushinator option
 values.
 */
 
-'use strict';
-
-import {error} from './log';
+import { error } from './log';
 
 /**
 Prepare a numerical value.
@@ -23,3 +21,5 @@ export function prepNumber(value) {
 
   return outgoing;
 }
+
+export default undefined;

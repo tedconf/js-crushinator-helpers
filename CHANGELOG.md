@@ -1,13 +1,40 @@
 # Changelog
 
-### 2.2.0 (Upcoming)
+### 2.4.0
+
+* [#14](https://github.com/tedconf/js-crushinator-helpers/issues/14) Allow host override for local testing
+* [#15](https://github.com/tedconf/js-crushinator-helpers/issues/15) Add "fit" option
+* [#17](https://github.com/tedconf/js-crushinator-helpers/issues/17) Additional image hosts
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/e0c9c11...e8c1b57)
+
+### 2.3.2
+
+* [#13](https://github.com/tedconf/js-crushinator-helpers/pull/13) Add `Object.assign` polyfill
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/82d6435...078e1df)
+
+### 2.3.1
+
+* [#12](https://github.com/tedconf/js-crushinator-helpers/issues/12) Gracefully handle invalid input values
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/ecfe982...50d2beb)
+
+### 2.3.0
+
+* [#11](https://github.com/tedconf/js-crushinator-helpers/issues/11) Accommodate Crushinator's move to `pi.tedcdn.com`
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/fe06606...ea6c48c)
+
+### 2.2.0
 
 * [#5](https://github.com/tedconf/js-crushinator-helpers/issues/5) Allow hyphenated form for Crushinator options
 * [#6](https://github.com/tedconf/js-crushinator-helpers/issues/6) Provide AMD-only distribution
 * [#9](https://github.com/tedconf/js-crushinator-helpers/issues/9) Add option for custom query parameters
 * [#7](https://github.com/tedconf/js-crushinator-helpers/issues/7) Deprecate direct use of string API for query params
+* Add `pe.tedcdn.com` to our hosts whitelist
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/129f407...master)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/03b3c08...e19749f)
 
 ### 2.1.0
 
