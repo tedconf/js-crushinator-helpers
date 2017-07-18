@@ -327,6 +327,49 @@ describe('crushinator', () => {
           `${crushed}?c=320%2C240%2C250%2C150`,
         );
       });
+
+      it('should recognize the blur option', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            blur: { radius: 2, sigma: 10 },
+          }),
+          `${crushed}?blur=2%2C10`,
+        );
+      });
+
+      it('should recognize the gamma option', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            gamma: { red: 50, green: 10, blue: 10 },
+          }),
+          `${crushed}?gamma=50%2C10%2C10`,
+        );
+      });
+
+      it('should recognize the grayscale option', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            grayscale: 90,
+          }),
+          `${crushed}?grayscale=90`,
+        );
+      });
+
+      it('should recognize the unsharp option', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            unsharp: { radius: 1.4, sigma: 0.7, amount: 0.8, threshold: 1 },
+          }),
+          `${crushed}?u%5Br%5D=1.4&u%5Bs%5D=0.7&u%5Ba%5D=0.8&u%5Bt%5D=1`,
+        );
+      });
+
+      it('should fill in default unsharp values if needed', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, { unsharp: true }),
+          `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0`,
+        );
+      });
     });
   });
 });

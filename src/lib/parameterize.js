@@ -4,6 +4,7 @@ Convert options to a parameters object.
 
 import * as crop from './crop-option';
 import { fit } from './fit-option';
+import { unsharp } from './unsharp-option';
 import { dehyphenate } from './dehyphenate';
 import { prepNumber } from './preppers';
 
@@ -44,6 +45,23 @@ export function parameterize(incoming) {
 
       case 'crop':
         params[crop.param(value)] = crop.filter(value);
+        break;
+
+      case 'blur':
+        params.blur = `${prepNumber(value.radius)},${prepNumber(value.sigma)}`;
+        break;
+
+      case 'gamma':
+        params.gamma = `${prepNumber(value.red)},${prepNumber(value.green)},${prepNumber(value.blue)}`;
+        break;
+
+      case 'grayscale':
+      case 'greyscale':
+        params.grayscale = prepNumber(value);
+        break;
+
+      case 'unsharp':
+        Object.assign(params, unsharp(options));
         break;
 
       case 'query':
