@@ -358,9 +358,16 @@ describe('crushinator', () => {
       it('should recognize the unsharp option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            unsharp: { radius: 2, sigma: 0.5, amount: 0.8, threshold: 0 },
+            unsharp: { radius: 1.4, sigma: 0.7, amount: 0.8, threshold: 1 },
           }),
-          `${crushed}?u[r]=2&u[s]=0.5&u[a]=0.8&u[t]=0`,
+          `${crushed}?u%5Br%5D=1.4&u%5Bs%5D=0.7&u%5Ba%5D=0.8&u%5Bt%5D=1`,
+        );
+      });
+
+      it('should fill in default unsharp values if needed', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, { unsharp: true }),
+          `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0`,
         );
       });
     });
