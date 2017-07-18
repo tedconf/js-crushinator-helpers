@@ -1,5 +1,11 @@
 # Changelog
 
+### (Upcoming)
+
+* [#10](https://github.com/tedconf/js-crushinator-helpers/issues/10) Support for additional Crushinator options
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/0bb7aa1...master)
+
 ### 2.4.0
 
 * [#14](https://github.com/tedconf/js-crushinator-helpers/issues/14) Allow host override for local testing
