@@ -141,7 +141,10 @@ export function crush(url, options = {}) {
 
   // Stringify object options while adding defaults
   if (typeof options === 'object') {
-    params = serialize(parameterize(defaultify(options)));
+    params = serialize(parameterize(defaultify(Object.assign(
+      { defaults: config.defaults },
+      options,
+    ))));
   }
 
   return `${config.host}/r/${uncrushed.replace(/.*\/\//, '')}${params ? `?${params}` : ''}`;
