@@ -93,12 +93,16 @@ describe('crushinator', () => {
   });
 
   describe('crush', () => {
+    const defaults = Object.assign({}, crushinator.config);
     const sandbox = sinon.sandbox.create();
 
     let uncrushed;
     let crushed;
 
     beforeEach(() => {
+      // Disable default options for most tests to simplify test cases
+      crushinator.config.defaults = false;
+
       uncrushed = 'https://images.ted.com/image.jpg';
       crushed = 'https://pi.tedcdn.com/r/images.ted.com/image.jpg';
 
@@ -107,6 +111,9 @@ describe('crushinator', () => {
 
     afterEach(() => {
       sandbox.restore();
+
+      // Restore original configuration
+      Object.assign(crushinator.config, defaults);
     });
 
     it('should politely pass on crushing incoherent values', () => {
@@ -184,18 +191,70 @@ describe('crushinator', () => {
 
     // Testing configuration overrides
     context('with configurations', () => {
-      const defaults = Object.assign({}, crushinator.config);
-
-      afterEach(() => {
-        Object.assign(crushinator.config, defaults);
-      });
-
       it('should use the crushinator host override', () => {
         crushinator.config.host = 'https://example.com';
         assert.equal(
           crushinator.crush('https://images.ted.com/image.jpg'),
           'https://example.com/r/images.ted.com/image.jpg',
         );
+      });
+    });
+
+    // Testing default options
+    context('with defaults', () => {
+      const defaultParams = 'u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0&quality=82';
+
+      context('disabled via config', () => {
+        beforeEach(() => {
+          crushinator.config.defaults = false;
+        });
+
+        it('should not use default options', () => {
+          assert.equal(crushinator.crush(uncrushed), crushed);
+        });
+      });
+
+      context('enabled via config', () => {
+        beforeEach(() => {
+          crushinator.config.defaults = true;
+        });
+
+        it('should use the default options', () => {
+          assert.equal(crushinator.crush(uncrushed), `${crushed}?${defaultParams}`);
+        });
+      });
+
+      context('enabled via options, disabled via config', () => {
+        beforeEach(() => {
+          crushinator.config.defaults = false;
+        });
+
+        it('should use the default options', () => {
+          assert.equal(crushinator.crush(uncrushed, { defaults: true }), `${crushed}?${defaultParams}`);
+        });
+      });
+
+      context('disabled via options, enabled via config', () => {
+        beforeEach(() => {
+          crushinator.config.defaults = true;
+        });
+
+        it('should not use default options', () => {
+          assert.equal(crushinator.crush(uncrushed, { defaults: false }), crushed);
+        });
+      });
+
+      context('enabled but partially overridden by options', () => {
+        beforeEach(() => {
+          crushinator.config.defaults = true;
+        });
+
+        it('should use the default options', () => {
+          assert.equal(
+            crushinator.crush(uncrushed, { quality: 99 }),
+            `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0&quality=99`,
+          );
+        });
       });
     });
 
