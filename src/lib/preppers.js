@@ -20,17 +20,31 @@ export function isBlank(value) {
 }
 
 /**
+Prepare a boolean value.
+
+@param {*} value - Value that should be typecast as a boolean.
+@returns {boolean}
+*/
+export function prepBoolean(value, defaultValue = false) {
+  return (
+    typeof value === 'undefined' ?
+    defaultValue :
+    !!value
+  );
+}
+
+/**
 Prepare a numerical value.
 
 @param {*} value - Value that should be typecast as a number.
 @returns {number}
 */
-export function prepNumber(value, fallback = 0) {
-  let outgoing = isBlank(value) ? fallback : Number(value);
+export function prepNumber(value, defaultValue = 0) {
+  let outgoing = isBlank(value) ? defaultValue : Number(value);
 
   if (!isFinite(outgoing)) {
     error(`"${value}" is not a finite number`);
-    outgoing = fallback;
+    outgoing = defaultValue;
   }
 
   return outgoing;
