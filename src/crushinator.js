@@ -4,6 +4,7 @@ Library of simple JS methods to produce crushed image URLs.
 http://github.com/tedconf/js-crushinator-helpers
 */
 
+import { defaultify } from './lib/defaultify';
 import { parameterize } from './lib/parameterize';
 import { serialize } from './lib/query-string';
 import { warn } from './lib/log';
@@ -54,6 +55,7 @@ function extractHost(url) {
 Overridable global configuration options.
 */
 export const config = {
+  defaults: true,
   host: 'https://pi.tedcdn.com',
 };
 
@@ -97,9 +99,12 @@ specified options string:
 @param {number} [options.width] - Target image width in pixels.
 @param {number} [options.height] - Target image height in pixels.
 @param {number} [options.quality] - Image quality as a percentage
-    (0-100).
+    (0-100). Defaults to 82.
 @param {boolean} [options.fit] - Will zoom and crop the image
-    for best fit into the target dimensions.
+    for best fit into the target dimensions (width and height)
+    if both are provided. Defaults to true.
+@param {boolean} [options.defaults] - Default options are excluded
+    if set to false. Defaults to true.
 @param {string} [options.align] - If cropping occurs, the image
     can be aligned to the "top", "bottom", "left", "right", or
     "middle" of the crop frame.
@@ -134,9 +139,9 @@ export function crush(url, options = {}) {
     params = options;
   }
 
-  // Stringify object options
+  // Stringify object options while adding defaults
   if (typeof options === 'object') {
-    params = serialize(parameterize(options));
+    params = serialize(parameterize(defaultify(options)));
   }
 
   return `${config.host}/r/${uncrushed.replace(/.*\/\//, '')}${params ? `?${params}` : ''}`;
