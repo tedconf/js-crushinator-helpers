@@ -40,7 +40,19 @@ Prepare a numerical value.
 @returns {number}
 */
 export function prepNumber(value, defaultValue = 0) {
-  let outgoing = isBlank(value) ? defaultValue : Number(value);
+  let outgoing = value;
+
+  // Boolean true evaluates to 1 numerically
+  if (value === true) {
+    outgoing = defaultValue || 1;
+  }
+
+  if (isBlank(value)) {
+    outgoing = defaultValue;
+  }
+
+  // Cast values numerically
+  outgoing = Number(outgoing);
 
   if (!isFinite(outgoing)) {
     error(`"${value}" is not a finite number`);
