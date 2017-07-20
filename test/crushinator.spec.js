@@ -388,12 +388,28 @@ describe('crushinator', () => {
         );
       });
 
-      it('should recognize the gamma option', () => {
+      it('should recognize global gamma correction', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            gamma: { red: 50, green: 10, blue: 10 },
+            gamma: 1.2,
           }),
-          `${crushed}?gamma=50%2C10%2C10`,
+          `${crushed}?gamma=1.2`,
+        );
+      });
+
+      it('should recognize channel-specific gamma correction', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            gamma: { red: 1.2, green: 1.3, blue: 1.4 },
+          }),
+          `${crushed}?gamma=1.2%2C1.3%2C1.4`,
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            gamma: { green: 1.3 },
+          }),
+          `${crushed}?gamma=1%2C1.3%2C1`,
         );
       });
 

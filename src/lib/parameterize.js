@@ -56,7 +56,11 @@ export function parameterize(incoming) {
         break;
 
       case 'gamma':
-        params.gamma = `${prepNumber(value.red)},${prepNumber(value.green)},${prepNumber(value.blue)}`;
+        params.gamma = (
+          typeof value === 'object' ?
+          `${prepNumber(value.red, 1)},${prepNumber(value.green, 1)},${prepNumber(value.blue, 1)}` :
+          prepNumber(value, 1)
+        );
         break;
 
       case 'grayscale':
