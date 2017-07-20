@@ -364,9 +364,18 @@ describe('crushinator', () => {
       it('should recognize the blur option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            blur: { radius: 2, sigma: 10 },
+            blur: { radius: 6, sigma: 3 },
           }),
-          `${crushed}?blur=2%2C10`,
+          `${crushed}?blur=6%2C3`,
+        );
+      });
+
+      it('should support blur with sigma only', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            blur: 4,
+          }),
+          `${crushed}?blur=0%2C4`,
         );
       });
 
