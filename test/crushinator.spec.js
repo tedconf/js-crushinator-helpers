@@ -176,7 +176,7 @@ describe('crushinator', () => {
 
     // Testing default options
     context('with defaults', () => {
-      const defaultParams = 'u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0&quality=82';
+      const defaultParams = 'u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03&quality=82';
 
       context('disabled via config', () => {
         beforeEach(() => {
@@ -226,7 +226,7 @@ describe('crushinator', () => {
         it('should use the default options', () => {
           assert.equal(
             crushinator.crush(uncrushed, { quality: 99 }),
-            `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0&quality=99`,
+            `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03&quality=99`,
           );
         });
       });
@@ -441,7 +441,7 @@ describe('crushinator', () => {
           crushinator.crush(uncrushed, {
             unsharp: true,
           }),
-          `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.05`,
+          `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03`,
         );
       });
     });
