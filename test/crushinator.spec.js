@@ -4,33 +4,7 @@ import * as sinon from 'sinon';
 import * as crushinator from '../src/crushinator';
 
 // Hosts where crushable images are stored
-const imageHosts = [
-  'assets.tedcdn.com',
-  'pb-assets.tedcdn.com',
-  'pa.tedcdn.com',
-  'pe.tedcdn.com',
-  'pf.tedcdn.com',
-  'ph.tedcdn.com',
-  'pj.tedcdn.com',
-  'pk.tedcdn.com',
-  'pl.tedcdn.com',
-  'assets2.tedcdn.com',
-  'tedcdnpf-a.akamaihd.net',
-  'tedcdnpa-a.akamaihd.net',
-  'tedcdnpe-a.akamaihd.net',
-  'images.ted.com',
-  'storage.ted.com',
-  'tedlive.ted.com',
-  'tedlive-staging.ted.com',
-  'ted2017.ted.com',
-  'ted2017-staging.ted.com',
-  'staging.ted.com',
-  's3.amazonaws.com',
-  's3-us-west-2.amazonaws.com',
-  'www.filepicker.io',
-  'ems.ted.com',
-  'ems-staging.ted.com',
-];
+const imageHosts = crushinator.imageHosts;
 
 // Hosts that have historically been used for crushinator
 const crushinatorHosts = [
