@@ -379,6 +379,15 @@ describe('crushinator', () => {
         );
       });
 
+      it('should support blur as a boolean', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            blur: true,
+          }),
+          `${crushed}?blur=0%2C2`,
+        );
+      });
+
       it('should recognize the gamma option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {

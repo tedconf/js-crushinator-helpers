@@ -48,7 +48,11 @@ export function parameterize(incoming) {
         break;
 
       case 'blur':
-        params.blur = `${prepNumber(value.radius)},${prepNumber(value.sigma, value)}`;
+        params.blur = (
+          typeof value === 'object' ?
+          `${prepNumber(value.radius)},${prepNumber(value.sigma, 2)}` :
+          `0,${prepNumber(value, 2)}`
+        );
         break;
 
       case 'gamma':
