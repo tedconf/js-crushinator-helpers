@@ -416,9 +416,16 @@ describe('crushinator', () => {
       it('should recognize the grayscale option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            grayscale: 90,
+            grayscale: 0.9,
           }),
           `${crushed}?grayscale=90`,
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            grayscale: true,
+          }),
+          `${crushed}?grayscale=100`,
         );
       });
 

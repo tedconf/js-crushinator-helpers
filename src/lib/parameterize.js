@@ -65,7 +65,7 @@ export function parameterize(incoming) {
 
       case 'grayscale':
       case 'greyscale':
-        params.grayscale = prepNumber(value);
+        params.grayscale = prepNumber(value, 1) * 100;
         break;
 
       case 'unsharp':
