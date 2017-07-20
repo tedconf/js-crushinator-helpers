@@ -1,5 +1,6 @@
 /**
-ParamBuilder option for the Crushinator crop controller.
+Given an options object, returns a parameters object with crop
+parameters included according to the specified options.
 */
 
 import { prepNumber } from './preppers';

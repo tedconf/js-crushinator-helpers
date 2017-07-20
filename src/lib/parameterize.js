@@ -1,5 +1,5 @@
 /**
-Convert options to a parameters object.
+Convert helper options to Crushinator URL parameters.
 */
 
 import * as crop from './crop-option';

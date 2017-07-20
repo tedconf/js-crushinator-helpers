@@ -1,5 +1,6 @@
 /**
-Given an options object, returns the parameters .
+Given an options object, returns a parameters object with unsharp
+parameters included according to the specified options.
 */
 
 import { prepNumber } from './preppers';

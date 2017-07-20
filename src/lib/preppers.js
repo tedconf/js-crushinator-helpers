@@ -1,6 +1,7 @@
 /**
-Methods used by stringifyOptions to prepare Crushinator option
-values.
+Methods used to prepare Crushinator option values for parameterization,
+mostly concerning typecasting and type-checking with application of
+default values.
 */
 
 import { error } from './log';

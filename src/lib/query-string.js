@@ -1,5 +1,5 @@
 /**
-Query string helper methods
+Query string helper methods.
 */
 
 /**
@@ -28,3 +28,5 @@ export function serialize(params, prefix) {
 
   return parts.join('&');
 }
+
+export default undefined;
