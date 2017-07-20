@@ -436,6 +436,13 @@ describe('crushinator', () => {
           }),
           `${crushed}?u%5Br%5D=1.4&u%5Bs%5D=0.7&u%5Ba%5D=0.8&u%5Bt%5D=1`,
         );
+
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            unsharp: true,
+          }),
+          `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0`,
+        );
       });
 
       it('should fill in default unsharp values if needed', () => {
