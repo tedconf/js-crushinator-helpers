@@ -134,7 +134,17 @@ crushinator.crush('https://images.ted.com/image.jpg', { quality: 93 })
 ```
 
 ### fit
-(TBD)
+Boolean. Shorthand which, when enabled, results in "best fit" (or "zoom and crop") resizing if the output width and height are both specified.
+
+It is enabled (true) by default, and can be disabled by setting to false:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', {
+  width: 320,
+  height: 240,
+  fit: false,
+})
+```
 
 ### defaults
 (TBD)
