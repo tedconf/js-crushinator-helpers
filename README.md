@@ -217,13 +217,54 @@ crushinator.crush('https://images.ted.com/image.jpg', {
 ```
 
 ### blur
-(TBD)
+Number or Boolean. A numeric value indicates the blur sigma (loosely: the blur spread amount) in pixels, while a boolean `true` uses a default blur sigma of 2.
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', { blur: 1.5 })
+```
+
+You may further tune the blur behavior by instead specifying an object, with the following properties:
+
+* `sigma` – numeric; blur "spread" amount in pixels.
+* `radius` – numeric; maximum pixel area to consider. Should be larger than (probably at least 2x) the blur sigma.
+
+Example with object value:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', {
+  blur: { sigma: 1.5, radius: 3 },
+})
+```
 
 ### gamma
-(TBD)
+Number or Object. If numeric, this value is used as a gamma correction multiplier applied to all channels in an image:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', { gamma: 1.5 })
+```
+
+Values less than 1 darken the image, and values greater than 1 lighten it. Reasonable values extend from 0.8 to 2.3.
+
+An object form is also supported for channel-specific gamma correction, where properties `red`, `green`, and `blue` indicate gamma correction multipliers for their respective channels:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', {
+  gamma: { red: 1.7, green: 2.3, blue: 1.2 },
+})
+```
 
 ### grayscale
-(TBD)
+Boolean. If true, Crushinator fully desaturates the image, resulting in a rich grayscale version.
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', { grayscale: true })
+```
+
+Desaturated images are sometimes considered too dark for their intended purpose, so the `grayscale` property also supports a numeric value (a decimal percentage) which can be used to darken the output image:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', { grayscale: 0.7 })
+```
 
 ### unsharp
 (TBD)
