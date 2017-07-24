@@ -10,35 +10,48 @@ import { serialize } from './lib/query-string';
 import { warn } from './lib/log';
 
 /**
-A list of strings and regular expressions
+A whitelist: Crushinator is capable of optimizing images hosted on
+any of these domains.
 */
-const imageHosts = [
+export const imageHosts = [
   'assets.tedcdn.com',
-  'pb-assets.tedcdn.com',
+  'assets2.tedcdn.com',
+  'ems.ted.com',
+  'ems-staging.ted.com',
+  'images.ted.com',
   'pa.tedcdn.com',
+  'pb-assets.tedcdn.com',
   'pe.tedcdn.com',
   'pf.tedcdn.com',
   'ph.tedcdn.com',
   'pj.tedcdn.com',
   'pk.tedcdn.com',
   'pl.tedcdn.com',
-  'assets2.tedcdn.com',
-  'tedcdnpf-a.akamaihd.net',
+  's3.amazonaws.com',
+  's3-us-west-2.amazonaws.com',
+  'staging.ted.com',
+  'storage.ted.com',
   'tedcdnpa-a.akamaihd.net',
   'tedcdnpe-a.akamaihd.net',
-  'images.ted.com',
-  'storage.ted.com',
+  'tedcdnpf-a.akamaihd.net',
+  'tedconfblog.files.wordpress.com',
+  'tedideas.files.wordpress.com',
   'tedlive.ted.com',
   'tedlive-staging.ted.com',
   'ted2017.ted.com',
   'ted2017-staging.ted.com',
-  'staging.ted.com',
-  's3.amazonaws.com',
-  's3-us-west-2.amazonaws.com',
   'www.filepicker.io',
-  'ems.ted.com',
-  'ems-staging.ted.com',
+  'www.ted.com',
 ];
+
+/**
+Global configuration options. These can be overridden at the library
+level or via the options object by individual helper method calls.
+*/
+export const config = {
+  defaults: true,
+  host: 'https://pi.tedcdn.com',
+};
 
 /**
 Returns the portion of input URL that corresponds to the host name.
@@ -50,14 +63,6 @@ Returns the portion of input URL that corresponds to the host name.
 function extractHost(url) {
   return String(url).replace(/.*\/\/([^/]+).*/, '$1');
 }
-
-/**
-Overridable global configuration options.
-*/
-export const config = {
-  defaults: true,
-  host: 'https://pi.tedcdn.com',
-};
 
 /**
 Check to see if a URL passes Crushinator's host whitelist.
@@ -87,11 +92,15 @@ export function uncrush(url) {
 }
 
 /**
-Returns a version of the image URL that uses Crushinator with the
-specified options string:
+Returns a Crushinator-optimized version of an image URL, using options
+specified in a Plain Old JavaScript Object:
 
-    crush('http://images.ted.com/image.jpg', 'w=320')
+    crush('http://images.ted.com/image.jpg', { width: 320 })
       => 'https://pi.tedcdn.com/images.ted.com/image.jpg?w=320'
+
+If the input URL cannot be optimized (does not pass the whitelist) it
+is returned untampered, making this method safe to use for dynamic
+image sources.
 
 @public
 @param {string} url - URL of image to be optimized.
@@ -119,10 +128,38 @@ specified options string:
     (pixels from top.)
 @param {boolean} [options.crop.afterResize] - If true, crop will
     take place after the image has been resized.
+@param {Object|number} [options.blur] - Image blur configuration
+    (object) or blur spread amount in pixels (number).
+@param {number} [options.blur.sigma] - Blur spread amount in pixels.
+@param {number} [options.blur.radius] - Radial constraint of blur or
+    zero if unconstrained. Should be at least 2x sigma if specified.
+@param {Object|number} [options.gamma] - Gamma correction, applied
+    either to the whole image (number) or to individual color
+    channels (object).
+@param {number} [options.gamma.red] - Red channel gamma correction.
+@param {number} [options.gamma.green] - Green channel gamma correction.
+@param {number} [options.gamma.blue] - Blue channel gamma correction.
+@param {boolean|number} [options.grayscale] - Fully desaturates the
+    image if truthy. Optionally you may also darken the image by
+    specifying a decimal percentage value of less than 1.
+@param {Object|boolean} [options.unsharp] - Applies an unsharp mask
+    if true. Precise configurations can be specified in object form:
+@param {number} [options.unsharp.radius] - Number of pixels to which
+    sharpening should be applied surrounding each target pixel.
+@param {number} [options.unsharp.sigma] - Size of details to sharpen
+    in pixels. (Pedantically: the standard deviation of the Gaussian.)
+@param {number} [options.unsharp.amount] - Decimel percentage
+    representing the strength of the sharpening in terms of the
+    difference between the sharpened image and the original.
+@param {number} [options.unsharp.threshold] - Decimal percentage
+    representing a minimum amount of difference in a pixel vs
+    surrounding colors before it's considered a sharpenable detail.
+@param {Object} [options.query] - Additional query parameters to
+    include in the Crushinator-optimized image URL.
 @returns {string}
 */
 export function crush(url, options = {}) {
-  // Avoid double-crushing the image
+  // Avoid double-crushing images
   const uncrushed = uncrush(url);
 
   // Apply host whitelist

@@ -1,6 +1,7 @@
 /**
-Methods used by stringifyOptions to prepare Crushinator option
-values.
+Methods used to prepare Crushinator option values for parameterization,
+mostly concerning typecasting and type-checking with application of
+default values.
 */
 
 import { error } from './log';
@@ -40,7 +41,19 @@ Prepare a numerical value.
 @returns {number}
 */
 export function prepNumber(value, defaultValue = 0) {
-  let outgoing = isBlank(value) ? defaultValue : Number(value);
+  let outgoing = value;
+
+  // Boolean true evaluates to 1 numerically
+  if (value === true) {
+    outgoing = defaultValue || 1;
+  }
+
+  if (isBlank(value)) {
+    outgoing = defaultValue;
+  }
+
+  // Cast values numerically
+  outgoing = Number(outgoing);
 
   if (!isFinite(outgoing)) {
     error(`"${value}" is not a finite number`);

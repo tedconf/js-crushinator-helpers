@@ -4,33 +4,7 @@ import * as sinon from 'sinon';
 import * as crushinator from '../src/crushinator';
 
 // Hosts where crushable images are stored
-const imageHosts = [
-  'assets.tedcdn.com',
-  'pb-assets.tedcdn.com',
-  'pa.tedcdn.com',
-  'pe.tedcdn.com',
-  'pf.tedcdn.com',
-  'ph.tedcdn.com',
-  'pj.tedcdn.com',
-  'pk.tedcdn.com',
-  'pl.tedcdn.com',
-  'assets2.tedcdn.com',
-  'tedcdnpf-a.akamaihd.net',
-  'tedcdnpa-a.akamaihd.net',
-  'tedcdnpe-a.akamaihd.net',
-  'images.ted.com',
-  'storage.ted.com',
-  'tedlive.ted.com',
-  'tedlive-staging.ted.com',
-  'ted2017.ted.com',
-  'ted2017-staging.ted.com',
-  'staging.ted.com',
-  's3.amazonaws.com',
-  's3-us-west-2.amazonaws.com',
-  'www.filepicker.io',
-  'ems.ted.com',
-  'ems-staging.ted.com',
-];
+const imageHosts = crushinator.imageHosts;
 
 // Hosts that have historically been used for crushinator
 const crushinatorHosts = [
@@ -202,7 +176,7 @@ describe('crushinator', () => {
 
     // Testing default options
     context('with defaults', () => {
-      const defaultParams = 'u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0&quality=82';
+      const defaultParams = 'u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03&quality=82';
 
       context('disabled via config', () => {
         beforeEach(() => {
@@ -252,7 +226,7 @@ describe('crushinator', () => {
         it('should use the default options', () => {
           assert.equal(
             crushinator.crush(uncrushed, { quality: 99 }),
-            `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0&quality=99`,
+            `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03&quality=99`,
           );
         });
       });
@@ -390,43 +364,84 @@ describe('crushinator', () => {
       it('should recognize the blur option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            blur: { radius: 2, sigma: 10 },
+            blur: { radius: 6, sigma: 3 },
           }),
-          `${crushed}?blur=2%2C10`,
+          `${crushed}?blur=6%2C3`,
         );
       });
 
-      it('should recognize the gamma option', () => {
+      it('should support blur with sigma only', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            gamma: { red: 50, green: 10, blue: 10 },
+            blur: 4,
           }),
-          `${crushed}?gamma=50%2C10%2C10`,
+          `${crushed}?blur=0%2C4`,
+        );
+      });
+
+      it('should support blur as a boolean', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            blur: true,
+          }),
+          `${crushed}?blur=0%2C2`,
+        );
+      });
+
+      it('should recognize global gamma correction', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            gamma: 1.2,
+          }),
+          `${crushed}?gamma=1.2`,
+        );
+      });
+
+      it('should recognize channel-specific gamma correction', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            gamma: { red: 1.2, green: 1.3, blue: 1.4 },
+          }),
+          `${crushed}?gamma=1.2%2C1.3%2C1.4`,
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            gamma: { green: 1.3 },
+          }),
+          `${crushed}?gamma=1%2C1.3%2C1`,
         );
       });
 
       it('should recognize the grayscale option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            grayscale: 90,
+            grayscale: 0.9,
           }),
           `${crushed}?grayscale=90`,
+        );
+
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            grayscale: true,
+          }),
+          `${crushed}?grayscale=100`,
         );
       });
 
       it('should recognize the unsharp option', () => {
         assert.equal(
           crushinator.crush(uncrushed, {
-            unsharp: { radius: 1.4, sigma: 0.7, amount: 0.8, threshold: 1 },
+            unsharp: { radius: 1.4, sigma: 0.7, amount: 0.8, threshold: 0.5 },
           }),
-          `${crushed}?u%5Br%5D=1.4&u%5Bs%5D=0.7&u%5Ba%5D=0.8&u%5Bt%5D=1`,
+          `${crushed}?u%5Br%5D=1.4&u%5Bs%5D=0.7&u%5Ba%5D=0.8&u%5Bt%5D=0.5`,
         );
-      });
 
-      it('should fill in default unsharp values if needed', () => {
         assert.equal(
-          crushinator.crush(uncrushed, { unsharp: true }),
-          `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0`,
+          crushinator.crush(uncrushed, {
+            unsharp: true,
+          }),
+          `${crushed}?u%5Br%5D=2&u%5Bs%5D=0.5&u%5Ba%5D=0.8&u%5Bt%5D=0.03`,
         );
       });
     });

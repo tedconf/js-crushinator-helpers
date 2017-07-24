@@ -1,5 +1,5 @@
 /**
-Convert options to a parameters object.
+Convert helper options to Crushinator URL parameters.
 */
 
 import * as crop from './crop-option';
@@ -48,16 +48,24 @@ export function parameterize(incoming) {
         break;
 
       case 'blur':
-        params.blur = `${prepNumber(value.radius)},${prepNumber(value.sigma)}`;
+        params.blur = (
+          typeof value === 'object' ?
+          `${prepNumber(value.radius)},${prepNumber(value.sigma, 2)}` :
+          `0,${prepNumber(value, 2)}`
+        );
         break;
 
       case 'gamma':
-        params.gamma = `${prepNumber(value.red)},${prepNumber(value.green)},${prepNumber(value.blue)}`;
+        params.gamma = (
+          typeof value === 'object' ?
+          `${prepNumber(value.red, 1)},${prepNumber(value.green, 1)},${prepNumber(value.blue, 1)}` :
+          prepNumber(value, 1)
+        );
         break;
 
       case 'grayscale':
       case 'greyscale':
-        params.grayscale = prepNumber(value);
+        params.grayscale = prepNumber(value, 1) * 100;
         break;
 
       case 'unsharp':
