@@ -66,9 +66,32 @@ function warn(message) {
 }
 
 /**
-Methods used by stringifyOptions to prepare Crushinator option
-values.
+Methods used to prepare Crushinator option values for parameterization,
+mostly concerning typecasting and type-checking with application of
+default values.
 */
+
+/**
+Returns true if the value is undefined, null, or false.
+
+@param {*} value - Value to test for emptiness.
+@returns {boolean}
+*/
+function isBlank(value) {
+  return typeof value === 'undefined' || value === null || value === false;
+}
+
+/**
+Prepare a boolean value.
+
+@param {*} value - Value that should be typecast as a boolean.
+@returns {boolean}
+*/
+function prepBoolean(value) {
+  var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  return typeof value === 'undefined' ? defaultValue : !!value;
+}
 
 /**
 Prepare a numerical value.
@@ -77,18 +100,60 @@ Prepare a numerical value.
 @returns {number}
 */
 function prepNumber(value) {
-  var outgoing = Number(value);
+  var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+  var outgoing = value;
+
+  // Boolean true evaluates to 1 numerically
+  if (value === true) {
+    outgoing = defaultValue || 1;
+  }
+
+  if (isBlank(value)) {
+    outgoing = defaultValue;
+  }
+
+  // Cast values numerically
+  outgoing = Number(outgoing);
 
   if (!isFinite(outgoing)) {
     error$1('"' + value + '" is not a finite number');
-    outgoing = 0;
+    outgoing = defaultValue;
   }
 
   return outgoing;
 }
 
 /**
-ParamBuilder option for the Crushinator crop controller.
+Add defaults to a Crushinator helper options object,
+unless explicitly requested not to do so.
+*/
+
+/**
+Default Crushinator helper options.
+*/
+var defaultOptions = {
+  fit: true,
+  unsharp: true,
+  quality: 82
+};
+
+/**
+Given a list of options returns those options seeded with the defaults
+specified above unless the "defaults" option is set to false.
+
+@param {Object} [options] - Incoming Crushinator helper options.
+@returns {Object}
+*/
+function defaultify() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  return _extends({}, prepBoolean(options.defaults, true) ? defaultOptions : {}, options);
+}
+
+/**
+Given an options object, returns a parameters object with crop
+parameters included according to the specified options.
 */
 
 function param(cropOptions) {
@@ -123,6 +188,27 @@ function fit(options) {
       gravity: 'c',
       c: prepNumber(options.width) + ',' + prepNumber(options.height)
     });
+  }
+
+  return params;
+}
+
+/**
+Given an options object, returns a parameters object with unsharp
+parameters included according to the specified options.
+*/
+
+function unsharp(options) {
+  var params = {};
+  var value = options.unsharp;
+
+  if (value) {
+    _extends(params, { u: {
+        r: prepNumber(value.radius, 2),
+        s: prepNumber(value.sigma, 0.5),
+        a: prepNumber(value.amount, 0.8),
+        t: prepNumber(value.threshold, 0.03)
+      } });
   }
 
   return params;
@@ -164,7 +250,7 @@ function dehyphenate(values) {
 }
 
 /**
-Convert options to a parameters object.
+Convert helper options to Crushinator URL parameters.
 */
 
 function parameterize(incoming) {
@@ -206,6 +292,23 @@ function parameterize(incoming) {
         params[param(value)] = filter(value);
         break;
 
+      case 'blur':
+        params.blur = (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? prepNumber(value.radius) + ',' + prepNumber(value.sigma, 2) : '0,' + prepNumber(value, 2);
+        break;
+
+      case 'gamma':
+        params.gamma = (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' ? prepNumber(value.red, 1) + ',' + prepNumber(value.green, 1) + ',' + prepNumber(value.blue, 1) : prepNumber(value, 1);
+        break;
+
+      case 'grayscale':
+      case 'greyscale':
+        params.grayscale = prepNumber(value, 1) * 100;
+        break;
+
+      case 'unsharp':
+        _extends(params, unsharp(options));
+        break;
+
       case 'query':
         _extends(params, value || {});
         break;
@@ -219,7 +322,7 @@ function parameterize(incoming) {
 }
 
 /**
-Query string helper methods
+Query string helper methods.
 */
 
 /**
@@ -252,9 +355,19 @@ http://github.com/tedconf/js-crushinator-helpers
 */
 
 /**
-A list of strings and regular expressions
+A whitelist: Crushinator is capable of optimizing images hosted on
+any of these domains.
 */
-var imageHosts = ['assets.tedcdn.com', 'pb-assets.tedcdn.com', 'pa.tedcdn.com', 'pe.tedcdn.com', 'pf.tedcdn.com', 'ph.tedcdn.com', 'pj.tedcdn.com', 'pk.tedcdn.com', 'pl.tedcdn.com', 'assets2.tedcdn.com', 'tedcdnpf-a.akamaihd.net', 'tedcdnpa-a.akamaihd.net', 'tedcdnpe-a.akamaihd.net', 'images.ted.com', 'storage.ted.com', 'tedlive.ted.com', 'tedlive-staging.ted.com', 'ted2017.ted.com', 'ted2017-staging.ted.com', 'staging.ted.com', 's3.amazonaws.com', 's3-us-west-2.amazonaws.com', 'www.filepicker.io', 'ems.ted.com', 'ems-staging.ted.com'];
+var imageHosts = ['assets.tedcdn.com', 'assets2.tedcdn.com', 'ems.ted.com', 'ems-staging.ted.com', 'images.ted.com', 'pa.tedcdn.com', 'pb-assets.tedcdn.com', 'pe.tedcdn.com', 'pf.tedcdn.com', 'ph.tedcdn.com', 'pj.tedcdn.com', 'pk.tedcdn.com', 'pl.tedcdn.com', 's3.amazonaws.com', 's3-us-west-2.amazonaws.com', 'staging.ted.com', 'storage.ted.com', 'tedcdnpa-a.akamaihd.net', 'tedcdnpe-a.akamaihd.net', 'tedcdnpf-a.akamaihd.net', 'tedconfblog.files.wordpress.com', 'tedideas.files.wordpress.com', 'tedlive.ted.com', 'tedlive-staging.ted.com', 'ted2017.ted.com', 'ted2017-staging.ted.com', 'www.filepicker.io', 'www.ted.com'];
+
+/**
+Global configuration options. These can be overridden at the library
+level or via the options object by individual helper method calls.
+*/
+var config = {
+    defaults: true,
+    host: 'https://pi.tedcdn.com'
+};
 
 /**
 Returns the portion of input URL that corresponds to the host name.
@@ -264,15 +377,8 @@ Returns the portion of input URL that corresponds to the host name.
 @returns {string}
 */
 function extractHost(url) {
-  return String(url).replace(/.*\/\/([^/]+).*/, '$1');
+    return String(url).replace(/.*\/\/([^/]+).*/, '$1');
 }
-
-/**
-Overridable global configuration options.
-*/
-var config = {
-  host: 'https://pi.tedcdn.com'
-};
 
 /**
 Check to see if a URL passes Crushinator's host whitelist.
@@ -281,7 +387,7 @@ Check to see if a URL passes Crushinator's host whitelist.
 @returns {boolean}
 */
 function crushable(url) {
-  return imageHosts.indexOf(extractHost(url)) !== -1;
+    return imageHosts.indexOf(extractHost(url)) !== -1;
 }
 
 /**
@@ -291,22 +397,26 @@ Restore a previously crushed URL to its original form.
 @returns {string}
 */
 function uncrush(url) {
-  var parts = String(url).match(/(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
+    var parts = String(url).match(/(.+)?\/\/(?:(?:img(?:-ssl)?|pi)\.tedcdn\.com|tedcdnpi-a\.akamaihd\.net)\/r\/([^?]+)/);
 
-  // Avoid double-crushing images
-  if (parts) {
-    return uncrush(parts[1] + '//' + parts[2]);
-  }
+    // Avoid double-crushing images
+    if (parts) {
+        return uncrush(parts[1] + '//' + parts[2]);
+    }
 
-  return url;
+    return url;
 }
 
 /**
-Returns a version of the image URL that uses Crushinator with the
-specified options string:
+Returns a Crushinator-optimized version of an image URL, using options
+specified in a Plain Old JavaScript Object:
 
-    crush('http://images.ted.com/image.jpg', 'w=320')
+    crush('http://images.ted.com/image.jpg', { width: 320 })
       => 'https://pi.tedcdn.com/images.ted.com/image.jpg?w=320'
+
+If the input URL cannot be optimized (does not pass the whitelist) it
+is returned untampered, making this method safe to use for dynamic
+image sources.
 
 @public
 @param {string} url - URL of image to be optimized.
@@ -314,9 +424,12 @@ specified options string:
 @param {number} [options.width] - Target image width in pixels.
 @param {number} [options.height] - Target image height in pixels.
 @param {number} [options.quality] - Image quality as a percentage
-    (0-100).
+    (0-100). Defaults to 82.
 @param {boolean} [options.fit] - Will zoom and crop the image
-    for best fit into the target dimensions.
+    for best fit into the target dimensions (width and height)
+    if both are provided. Defaults to true.
+@param {boolean} [options.defaults] - Default options are excluded
+    if set to false. Defaults to true.
 @param {string} [options.align] - If cropping occurs, the image
     can be aligned to the "top", "bottom", "left", "right", or
     "middle" of the crop frame.
@@ -331,35 +444,64 @@ specified options string:
     (pixels from top.)
 @param {boolean} [options.crop.afterResize] - If true, crop will
     take place after the image has been resized.
+@param {Object|number} [options.blur] - Image blur configuration
+    (object) or blur spread amount in pixels (number).
+@param {number} [options.blur.sigma] - Blur spread amount in pixels.
+@param {number} [options.blur.radius] - Radial constraint of blur or
+    zero if unconstrained. Should be at least 2x sigma if specified.
+@param {Object|number} [options.gamma] - Gamma correction, applied
+    either to the whole image (number) or to individual color
+    channels (object).
+@param {number} [options.gamma.red] - Red channel gamma correction.
+@param {number} [options.gamma.green] - Green channel gamma correction.
+@param {number} [options.gamma.blue] - Blue channel gamma correction.
+@param {boolean|number} [options.grayscale] - Fully desaturates the
+    image if truthy. Optionally you may also darken the image by
+    specifying a decimal percentage value of less than 1.
+@param {Object|boolean} [options.unsharp] - Applies an unsharp mask
+    if true. Precise configurations can be specified in object form:
+@param {number} [options.unsharp.radius] - Number of pixels to which
+    sharpening should be applied surrounding each target pixel.
+@param {number} [options.unsharp.sigma] - Size of details to sharpen
+    in pixels. (Pedantically: the standard deviation of the Gaussian.)
+@param {number} [options.unsharp.amount] - Decimel percentage
+    representing the strength of the sharpening in terms of the
+    difference between the sharpened image and the original.
+@param {number} [options.unsharp.threshold] - Decimal percentage
+    representing a minimum amount of difference in a pixel vs
+    surrounding colors before it's considered a sharpenable detail.
+@param {Object} [options.query] - Additional query parameters to
+    include in the Crushinator-optimized image URL.
 @returns {string}
 */
 function crush(url) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  // Avoid double-crushing the image
-  var uncrushed = uncrush(url);
+    // Avoid double-crushing images
+    var uncrushed = uncrush(url);
 
-  // Apply host whitelist
-  if (!crushable(uncrushed)) {
-    return uncrushed;
-  }
+    // Apply host whitelist
+    if (!crushable(uncrushed)) {
+        return uncrushed;
+    }
 
-  var params = {};
+    var params = {};
 
-  // Complain about use of the deprecated string API
-  if (typeof options === 'string') {
-    warn('Sending Crushinator options as a query string is ' + 'deprecated. Please use the object format.');
-    params = options;
-  }
+    // Complain about use of the deprecated string API
+    if (typeof options === 'string') {
+        warn('Sending Crushinator options as a query string is ' + 'deprecated. Please use the object format.');
+        params = options;
+    }
 
-  // Stringify object options
-  if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
-    params = serialize(parameterize(options));
-  }
+    // Stringify object options while adding defaults
+    if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+        params = serialize(parameterize(defaultify(_extends({ defaults: config.defaults }, options))));
+    }
 
-  return config.host + '/r/' + uncrushed.replace(/.*\/\//, '') + (params ? '?' + params : '');
+    return config.host + '/r/' + uncrushed.replace(/.*\/\//, '') + (params ? '?' + params : '');
 }
 
+exports.imageHosts = imageHosts;
 exports.config = config;
 exports.crushable = crushable;
 exports.uncrush = uncrush;

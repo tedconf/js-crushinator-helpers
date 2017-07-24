@@ -1,11 +1,11 @@
 # Changelog
 
-### (Upcoming)
+### 2.5.0
 
 * [#10](https://github.com/tedconf/js-crushinator-helpers/issues/10) Support for additional Crushinator options
 * [#18](https://github.com/tedconf/js-crushinator-helpers/issues/18) Add default options to the `crush` method
 
-[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/0bb7aa1...master)
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/0bb7aa1...2.5.0)
 
 ### 2.4.0
 
