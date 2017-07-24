@@ -191,7 +191,18 @@ crushinator.crush('https://images.ted.com/image.jpg', {
 ```
 
 ### align
-(TBD)
+String. When cropping an image (including "best fit" cropping) it's sometimes useful to dynamically specify a dynamic start point for where the crop begins in addition to the standard pixel offset. The align option allows you to specify whether you want cropping to start at the `"top"`, `"bottom"`, `"left"`, `"right"`, or `"middle"` of the image.
+
+Example:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', {
+  width: 320,
+  height: 240,
+  fit: true,
+  align: 'top',
+})
+```
 
 ### blur
 (TBD)
