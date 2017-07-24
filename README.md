@@ -267,7 +267,35 @@ crushinator.crush('https://images.ted.com/image.jpg', { grayscale: 0.7 })
 ```
 
 ### unsharp
-(TBD)
+Boolean or object. Applies an unsharp mask to accentuate image details.
+
+Crushinator's resampling causes fine image details to be softened, resulting in a perceived loss of quality and blurry/smudged images. Applying an unsharp mask improves this situation, while avoiding the increased noise and haloing typically associated with image sharpening.
+
+The unsharp mask is enabled (true) by default, and can be disabled by setting this option to false:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', { unsharp: false })
+```
+
+You can also fine tune the default unsharp mask, or set up a custom unsharp mask, by providing an object with the following options:
+
+* `amount` – numeric; decimal percentage representing the strength of the unsharp filter in terms of difference between the sharpened image and the original.
+* `sigma` – numeric; size of details to sharpen, in pixels.
+* `radius` – numeric; number of pixels to which sharpening should be applied surrounding each target pixel.
+* `threshold` – numeric; decimal percentage representing a minimum amount of difference in a pixel vs surrounding colors before it's considered a sharpenable detail.
+
+Example use with all custom tuning options specified:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', {
+  unsharp: {
+    amount: 0.8,
+    sigma: 0.5,
+    radius: 2,
+    threshold: 0.03,
+  },
+})
+```
 
 ### query
 Object. For specifying additional query parameters to include in the Crushinator-optimized image URL:
