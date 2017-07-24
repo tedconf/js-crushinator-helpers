@@ -147,7 +147,19 @@ crushinator.crush('https://images.ted.com/image.jpg', {
 ```
 
 ### defaults
-(TBD)
+Boolean. Shorthand which, when enabled, sets a number of default options which are useful for Crushinator's most common use cases.
+
+It is enabled (true) by default, and can be disabled by setting to false:
+
+```
+crushinator.crush('https://images.ted.com/image.jpg', { defaults: false })
+```
+
+When enabled, the following defaults are included:
+
+* [`fit: true`](#fit)
+* [`quality: 82`](#quality)
+* [`unsharp: true`](#unsharp)
 
 ### crop
 Object. Crop configuration options are passed in as an object with the following properties:
