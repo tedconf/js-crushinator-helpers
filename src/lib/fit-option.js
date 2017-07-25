@@ -11,9 +11,11 @@ export function fit(options) {
   if (options.fit && options.width && options.height) {
     Object.assign(params, {
       op: '^',
-      gravity: 'c',
       c: `${prepNumber(options.width)},${prepNumber(options.height)}`,
     });
+
+    // A custom alignment may be specified with the fit option
+    if (!options.align) params.gravity = 't';
   }
 
   return params;
