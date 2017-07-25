@@ -305,7 +305,7 @@ describe('crushinator', () => {
             height: 240,
             fit: true,
           }),
-          `${crushed}?w=320&h=240&op=%5E&gravity=t&c=320%2C240`,
+          `${crushed}?w=320&h=240&op=%5E&c=320%2C240&gravity=t`,
         );
       });
 
@@ -333,6 +333,18 @@ describe('crushinator', () => {
         assert.equal(
           crushinator.crush(uncrushed, { align: 'middle' }),
           `${crushed}?gravity=c`,
+        );
+      });
+
+      it('should allow custom alignment to override the gravity selected by the fit option', () => {
+        assert.equal(
+          crushinator.crush(uncrushed, {
+            width: 320,
+            height: 240,
+            align: 'middle',
+            fit: true,
+          }),
+          `${crushed}?w=320&h=240&gravity=c&op=%5E&c=320%2C240`,
         );
       });
 
