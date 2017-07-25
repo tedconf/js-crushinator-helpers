@@ -11,7 +11,7 @@ export function fit(options) {
   if (options.fit && options.width && options.height) {
     Object.assign(params, {
       op: '^',
-      gravity: 'c',
+      gravity: 't',
       c: `${prepNumber(options.width)},${prepNumber(options.height)}`,
     });
   }
