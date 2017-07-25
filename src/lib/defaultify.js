@@ -10,6 +10,7 @@ Default Crushinator helper options.
 */
 const defaultOptions = {
   fit: true,
+  align: 'top',
   unsharp: true,
   quality: 82,
 };

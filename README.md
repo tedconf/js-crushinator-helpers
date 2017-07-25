@@ -158,6 +158,7 @@ crushinator.crush('https://images.ted.com/image.jpg', { defaults: false })
 When enabled, the following defaults are included:
 
 * [`fit: true`](#fit)
+* [`align: 'top'`](#align)
 * [`quality: 82`](#quality)
 * [`unsharp: true`](#unsharp)
 
@@ -203,7 +204,9 @@ crushinator.crush('https://images.ted.com/image.jpg', {
 ```
 
 ### align
-String. When cropping an image (including "best fit" cropping) it's sometimes useful to dynamically specify a dynamic start point for where the crop begins in addition to the standard pixel offset. The align option allows you to specify whether you want cropping to start at the `"top"`, `"bottom"`, `"left"`, `"right"`, or `"middle"` of the image.
+String. When cropping an image (including "best fit" cropping) it's sometimes useful to dynamically specify an image edge at which cropping should begin. Cropping may be aligned to the `"top"`, `"bottom"`, `"left"`, `"right"`, or `"middle"` of the image.
+
+The default alignment is `"top"` since this is best suited for cropping TED Talks images.
 
 Example:
 
