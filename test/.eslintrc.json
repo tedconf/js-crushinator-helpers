@@ -1,6 +1,7 @@
 {
+  "extends": "../.eslintrc.json",
   "env": {
-    "mocha": true
+    "jest": true
   },
   "rules": {
     "import/no-extraneous-dependencies": 0

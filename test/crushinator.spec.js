@@ -94,14 +94,14 @@ describe('crushinator', () => {
         sinon.assert.calledWith(console.warn,
           'Sending Crushinator options as a query string is ' +
           'deprecated. Please use the object format.');
-      }
+      },
     );
 
     test(
       'should return the original URL for images hosted outside the whitelist',
       () => {
         expect(crushinator.crush('http://celly.xxx/waffles.jpg', { width: 320 })).toEqual('http://celly.xxx/waffles.jpg');
-      }
+      },
     );
 
     test('should avoid double-crushing images', () => {
@@ -133,7 +133,7 @@ describe('crushinator', () => {
             expect(crushinator.crush(`http:${url}`, { width: 200 })).toEqual(`https://pi.tedcdn.com/r/${imageHost}/image.jpg?w=200`);
 
             expect(crushinator.crush(`https:${url}`, { width: 200 })).toEqual(`https://pi.tedcdn.com/r/${imageHost}/image.jpg?w=200`);
-          }
+          },
         );
       });
     });
@@ -275,7 +275,7 @@ describe('crushinator', () => {
             align: 'middle',
             fit: true,
           })).toEqual(`${crushed}?w=320&h=240&gravity=c&op=%5E&c=320%2C240`);
-        }
+        },
       );
 
       test('should recognize the custom query option', () => {
