@@ -12,10 +12,10 @@
     "build": "node build",
     "lint": "eslint {src,test}{/*.js,/**/*.js}",
     "pretest": "npm run lint",
-    "test": "jest --ci --colors --testResultsProcessor=\"jest-junit\" --coverage",
-    "test:local": "jest --colors",
+    "test": "yarn test:fast --ci --colors --silent --testResultsProcessor=\"jest-junit\" --coverage",
+    "test:fast": "jest --colors",
     "test:watch": "jest --watch",
-    "prepush": "run-p --aggregate-output \"lint\" \"test:local\""
+    "prepush": "run-p --aggregate-output \"lint\" \"test:fast\""
   },
   "jest-junit": {
     "output": "./spec/reports/test-results.xml",

@@ -21,13 +21,13 @@ describe('crushinator', () => {
     });
 
     test('should deny images on unrecognized domains', () => {
-      expect(!crushinator.crushable('http://test.com/images/test.jpg')).toBeTruthy();
-      expect(!crushinator.crushable('https://test.com/images/test.jpg')).toBeTruthy();
+      expect(crushinator.crushable('http://test.com/images/test.jpg')).toBeFalsy();
+      expect(crushinator.crushable('https://test.com/images/test.jpg')).toBeFalsy();
     });
 
     test('should uncomplainingly disconfirm incoherent values', () => {
-      expect(!crushinator.crushable(undefined)).toBeTruthy();
-      expect(!crushinator.crushable(Infinity)).toBeTruthy();
+      expect(crushinator.crushable(undefined)).toBeFalsy();
+      expect(crushinator.crushable(Infinity)).toBeFalsy();
     });
   });
 
@@ -38,7 +38,6 @@ describe('crushinator', () => {
           const url = `//${crushinatorHost}/r/${imageHost}/images/test.jpg?ll=1&quality=89&w=500`;
 
           expect(crushinator.uncrush(`https:${url}`)).toEqual(`https://${imageHost}/images/test.jpg`);
-
           expect(crushinator.uncrush(`http:${url}`)).toEqual(`http://${imageHost}/images/test.jpg`);
         });
       });
