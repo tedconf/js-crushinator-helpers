@@ -1,5 +1,5 @@
 nodeBuild {
-  after_test_callback = { build =>
+  after_test_callback = { build ->
     build.step([
       $class: 'CloverPublisher',
       cloverReportDir: 'coverage',
