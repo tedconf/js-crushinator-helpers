@@ -13,7 +13,8 @@
     "lint": "eslint {src,test}{/*.js,/**/*.js}",
     "pretest": "npm run lint",
     "test": "jest --ci --colors --testResultsProcessor=\"jest-junit\" --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepush": "jest --colors"
   },
   "jest": {
     "coverageDirectory": "./spec/reports/"
@@ -21,7 +22,7 @@
   "jest-junit": {
     "output": "./spec/reports/test-results.xml",
     "ancestorSeparator": " › "
-},
+  },
   "dependencies": {},
   "devDependencies": {
     "babel-jest": "22.0.4",
@@ -32,6 +33,7 @@
     "eslint": "^3.13.0",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
+    "husky": "0.14.3",
     "jest": "22.0.5",
     "jest-junit": "3.4.1",
     "mocha": "^3.2.0",
