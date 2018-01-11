@@ -17,9 +17,6 @@
     "test:watch": "jest --watch",
     "prepush": "run-p --aggregate-output \"lint\" \"test:local\""
   },
-  "jest": {
-    "coverageDirectory": "./spec/reports/"
-  },
   "jest-junit": {
     "output": "./spec/reports/test-results.xml",
     "ancestorSeparator": " › "
