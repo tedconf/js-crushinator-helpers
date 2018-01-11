@@ -13,8 +13,9 @@
     "lint": "eslint {src,test}{/*.js,/**/*.js}",
     "pretest": "npm run lint",
     "test": "jest --ci --colors --testResultsProcessor=\"jest-junit\" --coverage",
+    "test:local": "jest --colors",
     "test:watch": "jest --watch",
-    "prepush": "jest --colors"
+    "prepush": "run-p --aggregate-output \"lint\" \"test:local\""
   },
   "jest": {
     "coverageDirectory": "./spec/reports/"
@@ -37,6 +38,7 @@
     "jest": "22.0.5",
     "jest-junit": "3.4.1",
     "mocha": "^3.2.0",
+    "npm-run-all": "4.1.2",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-uglify": "^1.0.1"
