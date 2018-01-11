@@ -1,5 +1,3 @@
-import * as sinon from 'sinon';
-
 import * as crushinator from '../src/crushinator';
 
 // Hosts where crushable images are stored
@@ -58,8 +56,6 @@ describe('crushinator', () => {
 
   describe('crush', () => {
     const defaults = Object.assign({}, crushinator.config);
-    const sandbox = sinon.sandbox.create();
-
     let uncrushed;
     let crushed;
 
@@ -69,13 +65,9 @@ describe('crushinator', () => {
 
       uncrushed = 'https://images.ted.com/image.jpg';
       crushed = 'https://pi.tedcdn.com/r/images.ted.com/image.jpg';
-
-      sandbox.spy(console, 'warn');
     });
 
     afterEach(() => {
-      sandbox.restore();
-
       // Restore original configuration
       Object.assign(crushinator.config, defaults);
     });
@@ -88,12 +80,16 @@ describe('crushinator', () => {
     test(
       'should warn about deprecation of the deprecated query string format',
       () => {
-        expect(crushinator.crush(uncrushed, 'w=320')).toEqual(`${crushed}?w=320`);
+        const spy = jest.spyOn(console, 'warn');
 
-        sinon.assert.calledOnce(console.warn);
-        sinon.assert.calledWith(console.warn,
-          'Sending Crushinator options as a query string is ' +
-          'deprecated. Please use the object format.');
+        const actual = crushinator.crush(uncrushed, 'w=320');
+
+        expect(actual).toEqual(`${crushed}?w=320`);
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(
+          'Sending Crushinator options as a query string is deprecated. ' +
+          'Please use the object format.',
+        );
       },
     );
 
