@@ -31,6 +31,7 @@ export const imageHosts = [
   's3-us-west-2.amazonaws.com',
   'staging.ted.com',
   'storage.ted.com',
+  'talkstar-photos.s3.amazonaws.com',
   'tedcdnpa-a.akamaihd.net',
   'tedcdnpe-a.akamaihd.net',
   'tedcdnpf-a.akamaihd.net',

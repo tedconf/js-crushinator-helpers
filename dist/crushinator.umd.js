@@ -364,7 +364,7 @@ http://github.com/tedconf/js-crushinator-helpers
 A whitelist: Crushinator is capable of optimizing images hosted on
 any of these domains.
 */
-var imageHosts = ['assets.tedcdn.com', 'assets2.tedcdn.com', 'ems.ted.com', 'ems-staging.ted.com', 'images.ted.com', 'pa.tedcdn.com', 'pb-assets.tedcdn.com', 'pe.tedcdn.com', 'pf.tedcdn.com', 'ph.tedcdn.com', 'pj.tedcdn.com', 'pk.tedcdn.com', 'pl.tedcdn.com', 's3.amazonaws.com', 's3-us-west-2.amazonaws.com', 'staging.ted.com', 'storage.ted.com', 'tedcdnpa-a.akamaihd.net', 'tedcdnpe-a.akamaihd.net', 'tedcdnpf-a.akamaihd.net', 'tedconfblog.files.wordpress.com', 'tedideas.files.wordpress.com', 'tedlive.ted.com', 'tedlive-staging.ted.com', 'ted2017.ted.com', 'ted2017-staging.ted.com', 'www.filepicker.io', 'www.ted.com'];
+var imageHosts = ['assets.tedcdn.com', 'assets2.tedcdn.com', 'ems.ted.com', 'ems-staging.ted.com', 'images.ted.com', 'pa.tedcdn.com', 'pb-assets.tedcdn.com', 'pe.tedcdn.com', 'pf.tedcdn.com', 'ph.tedcdn.com', 'pj.tedcdn.com', 'pk.tedcdn.com', 'pl.tedcdn.com', 's3.amazonaws.com', 's3-us-west-2.amazonaws.com', 'staging.ted.com', 'storage.ted.com', 'talkstar-photos.s3.amazonaws.com', 'tedcdnpa-a.akamaihd.net', 'tedcdnpe-a.akamaihd.net', 'tedcdnpf-a.akamaihd.net', 'tedconfblog.files.wordpress.com', 'tedideas.files.wordpress.com', 'tedlive.ted.com', 'tedlive-staging.ted.com', 'ted2017.ted.com', 'ted2017-staging.ted.com', 'www.filepicker.io', 'www.ted.com'];
 
 /**
 Global configuration options. These can be overridden at the library

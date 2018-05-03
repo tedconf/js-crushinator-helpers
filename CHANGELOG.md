@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.5.2
+
+* Use top-aligned crops for best fit by default
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/2.5.1...2.5.2)
+
+
 ### 2.5.1
 
 * [#20](https://github.com/tedconf/js-crushinator-helpers/issues/20) Use top-aligned crops for best fit by default
