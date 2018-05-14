@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.6.0
+
+* add talkstar s3 bucket to whitelist
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/2.5.2...2.6.0)
+
+
 ### 2.5.2
 
 * Use top-aligned crops for best fit by default
