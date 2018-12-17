@@ -7,6 +7,7 @@ http://github.com/tedconf/js-crushinator-helpers
 import { defaultify } from './lib/defaultify';
 import { parameterize } from './lib/parameterize';
 import { serialize } from './lib/query-string';
+import { desnag } from './lib/desnag';
 import { warn } from './lib/log';
 
 /**
@@ -185,7 +186,7 @@ export function crush(url, options = {}) {
     ))));
   }
 
-  return `${config.host}/r/${uncrushed.replace(/.*\/\//, '')}${params ? `?${params}` : ''}`;
+  return desnag(`${config.host}/r/${uncrushed.replace(/.*\/\//, '')}${params ? `?${params}` : ''}`);
 }
 
 export default crush;

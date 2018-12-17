@@ -117,6 +117,11 @@ describe('crushinator', () => {
       expect(crushinator.crush(url, {})).toEqual('https://pi.tedcdn.com/r/images.ted.com/image.jpg');
     });
 
+    test('should percent-encode known problematic characters', () => {
+      const url = 'https://images.ted.com/Joe\'s "air quotes" (1).jpg';
+      expect(crushinator.crush(url)).toEqual('https://pi.tedcdn.com/r/images.ted.com/Joe%27s %22air quotes%22 %281%29.jpg');
+    });
+
     // Host tests
     describe('Host testing', () => {
       imageHosts.forEach((imageHost) => {
