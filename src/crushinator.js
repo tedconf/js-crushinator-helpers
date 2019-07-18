@@ -42,6 +42,7 @@ export const imageHosts = [
   'tedlive-staging.ted.com',
   'ted2017.ted.com',
   'ted2017-staging.ted.com',
+  'userdata.amara.org',
   'www.filepicker.io',
   'www.ted.com',
 ];
