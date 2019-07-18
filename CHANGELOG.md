@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.7.0
+
+* add userdata.amara.org to whitelist
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/2.6.0...2.7.0)
+
 ### 2.6.0
 
 * add talkstar s3 bucket to whitelist
