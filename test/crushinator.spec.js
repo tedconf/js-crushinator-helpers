@@ -96,6 +96,7 @@ describe('crushinator', () => {
       'should return the original URL for images hosted outside the whitelist',
       () => {
         expect(crushinator.crush('http://celly.xxx/waffles.jpg', { width: 320 })).toEqual('http://celly.xxx/waffles.jpg');
+        expect(crushinator.crush('https://avatars.ted.com/v1/avatar/1350407280.svg')).toEqual('https://avatars.ted.com/v1/avatar/1350407280.svg');
       },
     );
 
