@@ -2,7 +2,11 @@
   "name": "ted-crushinator-helpers",
   "version": "2.7.0",
   "description": "JS methods to produce crushinator'd image URLs.",
-  "license": "MIT",
+  "author": "TED Tech",
+  "license": "UNLICENSED",
+  "files": [
+    "dist"
+  ],
   "main": "dist/crushinator.umd.min.js",
   "repository": {
     "type": "git",
@@ -11,33 +15,28 @@
   "scripts": {
     "build": "node build",
     "lint": "eslint {src,test}{/*.js,/**/*.js}",
-    "pretest": "npm run lint",
-    "test": "yarn test:fast --ci --colors --silent --testResultsProcessor=\"jest-junit\" --coverage",
+    "pretest": "yarn lint",
+    "test": "yarn test:fast --ci --silent --coverage --reporters=jest-junit",
     "test:fast": "jest --colors",
-    "test:watch": "jest --watch",
-    "prepush": "run-p --aggregate-output \"lint\" \"test:fast\""
+    "test:watch": "jest --watch"
   },
   "jest-junit": {
-    "output": "./spec/reports/test-results.xml",
+    "outputDirectory": "./spec/reports",
+    "outputName": "test-results.xml",
     "ancestorSeparator": " › "
   },
   "dependencies": {},
   "devDependencies": {
-    "babel-jest": "22.0.4",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-register": "^6.22.0",
-    "eslint": "^3.13.0",
-    "eslint-config-airbnb-base": "^11.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "husky": "0.14.3",
-    "jest": "22.0.5",
-    "jest-junit": "3.4.1",
-    "mocha": "^6.2.0",
-    "npm-run-all": "4.1.2",
-    "rollup": "^0.41.4",
-    "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-uglify": "^1.0.1"
+    "@babel/core": "^7.8.0",
+    "@babel/plugin-transform-object-assign": "^7.8.0",
+    "@babel/preset-env": "^7.8.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.0",
+    "jest": "^25.0.0",
+    "jest-junit": "^10.0.0",
+    "rollup": "^1.31.0",
+    "rollup-plugin-babel": "^4.3.0",
+    "rollup-plugin-uglify": "^6.0.0"
   }
 }

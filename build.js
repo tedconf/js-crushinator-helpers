@@ -1,44 +1,39 @@
-const rollup = require('rollup').rollup;
+const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
-const uglify = require('rollup-plugin-uglify');
-const fs = require('fs');
-
-// Set up Babel configuration
-const babelConfig = JSON.parse(fs.readFileSync('.babelrc', 'utf8'));
-babelConfig.babelrc = false;
-babelConfig.plugins.push('external-helpers');
-babelConfig.presets = [
-  ['es2015', { modules: false }],
-];
+const { uglify } = require('rollup-plugin-uglify');
 
 function writeBundle(bundle, suffix) {
   bundle.write({
-    dest: `dist/crushinator.umd${suffix}.js`,
+    output: {
+      file: `dist/crushinator.umd${suffix}.js`,
+      name: 'crushinator',
+    },
     format: 'umd',
     exports: 'named',
-    moduleName: 'crushinator',
   });
 
   bundle.write({
-    dest: `dist/crushinator.amd${suffix}.js`,
+    output: {
+      file: `dist/crushinator.amd${suffix}.js`,
+      amd: { id: 'crushinator' },
+    },
     format: 'amd',
     exports: 'named',
-    moduleId: 'crushinator',
   });
 }
 
 // Build unminified versions
 rollup({
-  entry: 'src/crushinator.js',
-  plugins: [babel(babelConfig)],
+  input: 'src/crushinator.js',
+  plugins: [babel()],
 }).then((bundle) => {
   writeBundle(bundle, '');
 });
 
 // Build minified versions
 rollup({
-  entry: 'src/crushinator.js',
-  plugins: [babel(babelConfig), uglify()],
+  input: 'src/crushinator.js',
+  plugins: [babel(), uglify()],
 }).then((bundle) => {
   writeBundle(bundle, '.min');
 });
