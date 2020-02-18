@@ -23,6 +23,7 @@
     "start": "tsdx watch",
     "build": "tsdx build --format cjs,esm,umd --name Crushinator",
     "lint": "tsdx lint",
+    "format": "prettier **/*.{md,ts} --write",
     "prepare": "tsdx build"
   },
   "dependencies": {},

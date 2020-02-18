@@ -1,13 +1,13 @@
 ## Prerequisites
 
-* This project uses [Yarn](https://yarnpkg.com/lang/en/docs/install/) for dependency management.
-* [NVM](https://github.com/creationix/nvm) is recommended to make sure you have the correct Node version installed for local development.
+- This project uses [Yarn](https://yarnpkg.com/lang/en/docs/install/) for dependency management.
+- [NVM](https://github.com/creationix/nvm) is recommended to make sure you have the correct Node version installed for local development.
 
 ## Installation
 
-* `git clone git@github.com:tedconf/js-crushinator-helpers.git`
-* Change into the new directory
-* `yarn install`
+- `git clone git@github.com:tedconf/js-crushinator-helpers.git`
+- Change into the new directory
+- `yarn install`
 
 ## Running tests
 
