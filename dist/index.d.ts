@@ -3,7 +3,7 @@ Crushinator Helpers
 Library of simple JS methods to produce crushed image URLs.
 http://github.com/tedconf/js-crushinator-helpers
 */
-import { CrushConfig } from './lib/crush-config';
+import { CrushConfig } from "./lib/crush-config";
 /**
 A whitelist: Crushinator is capable of optimizing images hosted on
 any of these domains.

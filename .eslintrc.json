@@ -4,7 +4,22 @@
     "@tedconf",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": ["*.spec.js"],
+      "env": { "jest": true }
+    }
   ],
   "parser": "babel-eslint",
   "settings": {

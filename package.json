@@ -1,9 +1,10 @@
 {
   "name": "ted-crushinator-helpers",
-  "version": "2.6.0",
+  "author": "TED Tech",
+  "version": "2.7.0",
   "description": "JS methods to produce crushinator'd image URLs.",
-  "license": "MIT",
-  "main": "dist/index.js",
+  "license": "UNLICENSED",
+  "main": "dist/crushinator.umd.production.min.js",
   "module": "dist/ted-crushinator-helpers.esm.js",
   "files": [
     "dist"
@@ -20,7 +21,7 @@
     "test:ci": "JEST_JUNIT_OUTPUT_DIR=\"./spec/reports/\" JEST_JUNIT_OUTPUT_NAME=\"test-results.xml\" tsdx test --ci --colors --silent --reporters=default --reporters=jest-junit --coverage",
     "prepush": "run-p --aggregate-output \"lint\" \"test:fast\"",
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "tsdx build --format cjs,esm,umd --name Crushinator",
     "lint": "tsdx lint",
     "prepare": "tsdx build"
   },
