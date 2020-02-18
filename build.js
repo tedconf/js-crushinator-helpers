@@ -7,9 +7,7 @@ const fs = require('fs');
 const babelConfig = JSON.parse(fs.readFileSync('.babelrc', 'utf8'));
 babelConfig.babelrc = false;
 babelConfig.plugins.push('external-helpers');
-babelConfig.presets = [
-  ['es2015', { modules: false }],
-];
+babelConfig.presets = [['env', { modules: false }]];
 
 function writeBundle(bundle, suffix) {
   bundle.write({
@@ -31,7 +29,7 @@ function writeBundle(bundle, suffix) {
 rollup({
   entry: 'src/crushinator.js',
   plugins: [babel(babelConfig)],
-}).then((bundle) => {
+}).then(bundle => {
   writeBundle(bundle, '');
 });
 
@@ -39,6 +37,6 @@ rollup({
 rollup({
   entry: 'src/crushinator.js',
   plugins: [babel(babelConfig), uglify()],
-}).then((bundle) => {
+}).then(bundle => {
   writeBundle(bundle, '.min');
 });

@@ -1,19 +1,20 @@
 /**
-Convert helper options to Crushinator URL parameters.
-*/
+ * Convert helper options to Crushinator URL parameters.
+ */
 
 import * as crop from './crop-option';
 import { fit } from './fit-option';
 import { unsharp } from './unsharp-option';
 import { dehyphenate } from './dehyphenate';
 import { prepNumber } from './preppers';
+import { CrushConfig } from './crush-config';
 
-export function parameterize(incoming) {
-  const params = {};
-  const options = dehyphenate(incoming);
+export function parameterize(incoming: CrushConfig): any {
+  const params: any = {};
+  const options: any = dehyphenate(incoming);
 
-  Object.keys(options).forEach((option) => {
-    const value = options[option];
+  Object.keys(options).forEach(option => {
+    const value: any = options[option];
 
     switch (option) {
       case 'width':
@@ -33,14 +34,16 @@ export function parameterize(incoming) {
         break;
 
       case 'align':
-        params.gravity = {
-          top: 'n',
-          left: 'w',
-          center: 'c',
-          middle: 'c',
-          right: 'e',
-          bottom: 's',
-        }[value] || 'c';
+        params.gravity =
+          // @ts-ignore
+          {
+            top: 'n',
+            left: 'w',
+            center: 'c',
+            middle: 'c',
+            right: 'e',
+            bottom: 's',
+          }[value] || 'c';
         break;
 
       case 'crop':
@@ -48,19 +51,20 @@ export function parameterize(incoming) {
         break;
 
       case 'blur':
-        params.blur = (
-          typeof value === 'object' ?
-          `${prepNumber(value.radius)},${prepNumber(value.sigma, 2)}` :
-          `0,${prepNumber(value, 2)}`
-        );
+        params.blur =
+          typeof value === 'object'
+            ? `${prepNumber(value.radius)},${prepNumber(value.sigma, 2)}`
+            : `0,${prepNumber(value, 2)}`;
         break;
 
       case 'gamma':
-        params.gamma = (
-          typeof value === 'object' ?
-          `${prepNumber(value.red, 1)},${prepNumber(value.green, 1)},${prepNumber(value.blue, 1)}` :
-          prepNumber(value, 1)
-        );
+        params.gamma =
+          typeof value === 'object'
+            ? `${prepNumber(value.red, 1)},${prepNumber(
+                value.green,
+                1,
+              )},${prepNumber(value.blue, 1)}`
+            : prepNumber(value, 1);
         break;
 
       case 'grayscale':

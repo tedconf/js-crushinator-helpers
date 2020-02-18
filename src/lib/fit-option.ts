@@ -1,12 +1,13 @@
 /**
-Given an options object, returns the parameters required to
-resize the image for best fit if applicable.
-*/
+ * Given an options object, returns the parameters required to
+ * resize the image for best fit if applicable.
+ */
 
 import { prepNumber } from './preppers';
+import { CrushConfig } from './crush-config';
 
-export function fit(options) {
-  const params = {};
+export function fit(options: CrushConfig): any {
+  const params: any = {};
 
   if (options.fit && options.width && options.height) {
     Object.assign(params, {

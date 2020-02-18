@@ -5,11 +5,26 @@ parameters included according to the specified options.
 
 import { prepNumber } from './preppers';
 
-export function param(cropOptions) {
+/*
+ * @param width - Width of cropped section in pixels.
+ * @param height - Height of cropped section in pixels.
+ * @param x - Coordinate at which to start crop (pixels from left.)
+ * @param y - Coordinate at which to start crop (pixels from top.)
+ * @param afterResize - If true, crop will take place after the image has been resized.
+ */
+export type CropOptions = Partial<{
+  afterResize: boolean;
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+}>;
+
+export function param(cropOptions: CropOptions): string {
   return cropOptions.afterResize ? 'c' : 'precrop';
 }
 
-export function filter(cropOptions) {
+export function filter(cropOptions: CropOptions): string {
   const data = [];
 
   data.push(prepNumber(cropOptions.width));

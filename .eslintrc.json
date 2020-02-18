@@ -1,9 +1,32 @@
 {
-  "extends": "airbnb-base",
-  "plugins": [
-    "import"
+  "plugins": ["import"],
+  "extends": [
+    "@tedconf",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
+  "parser": "babel-eslint",
+  "settings": {
+    "import/extensions": [".js", ".ts"],
+    "import/resolver": {
+      "webpack": {
+        "config": {
+          "resolve": {
+            "extensions": [".js", ".ts"]
+          }
+        }
+      }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    }
+  },
   "rules": {
-    "no-console": 0
+    "no-console": 0,
+    "prefer-destructuring": 0,
+    "import/extensions": 0,
+    "prefer-object-spread": 0,
+    "@typescript-eslint/ban-ts-ignore": 0
   }
 }
