@@ -8,6 +8,7 @@
     "dist"
   ],
   "main": "dist/crushinator.umd.min.js",
+  "types": "dist/crushinator.d.ts",
   "repository": {
     "type": "git",
     "url": "git@github.com:tedconf/js-crushinator-helpers.git"
