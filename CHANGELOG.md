@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.8.0
+
+* Add a type definitions for TypeScript
+
 ### 2.7.0
 
 * add userdata.amara.org to whitelist
