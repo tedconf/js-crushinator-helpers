@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.8.1
+
+* Add another talkstar s3 bucket, and ideas.ted.com to whitelist
+
+[(Commit list.)](https://github.com/tedconf/js-crushinator-helpers/compare/2.8.0...2.8.1)
+
 ### 2.8.0
 
 * Add a type definitions for TypeScript
