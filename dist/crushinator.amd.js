@@ -333,7 +333,7 @@ define('crushinator', ['exports'], function (exports) { 'use strict';
   any of these domains.
   */
 
-  var imageHosts = ['assets.tedcdn.com', 'assets2.tedcdn.com', 'ems.ted.com', 'ems-staging.ted.com', 'images.ted.com', 'pa.tedcdn.com', 'pb-assets.tedcdn.com', 'pe.tedcdn.com', 'pf.tedcdn.com', 'ph.tedcdn.com', 'pj.tedcdn.com', 'pk.tedcdn.com', 'pl.tedcdn.com', 's3.amazonaws.com', 's3-us-west-2.amazonaws.com', 'staging.ted.com', 'storage.ted.com', 'talkstar-photos.s3.amazonaws.com', 'tedcdnpa-a.akamaihd.net', 'tedcdnpe-a.akamaihd.net', 'tedcdnpf-a.akamaihd.net', 'tedconfblog.files.wordpress.com', 'tedideas.files.wordpress.com', 'tedlive.ted.com', 'tedlive-staging.ted.com', 'ted2017.ted.com', 'ted2017-staging.ted.com', 'userdata.amara.org', 'www.filepicker.io', 'www.ted.com'];
+  var imageHosts = ['assets.tedcdn.com', 'assets2.tedcdn.com', 'ems.ted.com', 'ems-staging.ted.com', 'ideas.ted.com', 'images.ted.com', 'pa.tedcdn.com', 'pb-assets.tedcdn.com', 'pe.tedcdn.com', 'pf.tedcdn.com', 'ph.tedcdn.com', 'pj.tedcdn.com', 'pk.tedcdn.com', 'pl.tedcdn.com', 's3.amazonaws.com', 's3-us-west-2.amazonaws.com', 'staging.ted.com', 'storage.ted.com', 'talkstar-assets.s3.amazonaws.com', 'talkstar-photos.s3.amazonaws.com', 'tedcdnpa-a.akamaihd.net', 'tedcdnpe-a.akamaihd.net', 'tedcdnpf-a.akamaihd.net', 'tedconfblog.files.wordpress.com', 'tedideas.files.wordpress.com', 'tedlive.ted.com', 'tedlive-staging.ted.com', 'ted2017.ted.com', 'ted2017-staging.ted.com', 'userdata.amara.org', 'www.filepicker.io', 'www.ted.com'];
   /**
   Global configuration options. These can be overridden at the library
   level or via the options object by individual helper method calls.
